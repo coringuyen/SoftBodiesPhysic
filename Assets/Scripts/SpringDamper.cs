@@ -3,19 +3,15 @@ using System.Collections;
 
 public class SpringDamper : MonoBehaviour {
 
-    public float SpringContants;
-    public float DampingFactor;
-    Vector3 RestLength;
+	public float SpringConstant;
+	public float DampingFactor;
+	Vector3 Restlength;
 
-    public Particle p1;
-    public Particle p2;
+	public void computeForce(Particle p1, Particle p2)
+	{
+		Restlength = p1.Position - p2.Position;
 
-    public void ComputeForce()
-    {
-		RestLength = p1.Pos - p2.Pos;
-		
-		Vector3 spring = -SpringContants * RestLength;
-		Vector3 damp = -DampingFactor * (p1.Vel - p2.Vel);
-    }
-	
+		Vector3 spring = - SpringConstant * Restlength;
+		Vector3 damp = - DampingFactor * (p1.Velocity - p2.Velocity);
+	}
 }

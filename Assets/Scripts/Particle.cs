@@ -12,6 +12,7 @@ public class Particle : MonoBehaviour {
 
 	void Start ()
     {
+		force = new Vector3 (0f,-9.8f,0f);
         rb = GetComponent<Rigidbody>();
         Pos = transform.position;
         Vel = rb.velocity;

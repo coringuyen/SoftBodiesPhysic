@@ -14,20 +14,31 @@ public class ClothSimulation : MonoBehaviour
 
 	void Start()
 	{
-		float row = 5;
-		float col = 5;
+		float rows = 5;
+		float cols = 5;
 		// Making a Grid
 		for (int i = 0; i < row; ++i) 
 		{
 			for (int j = 0; i < col; ++i) 
 			{
 				GameObject particle = Instantiate (Particles) as GameObject;
-				particle.transform.position = new Vector3 (i - 10f, 1.5f, 0f);
+				particle.transform.position = new Vector3 (i * 20 / rows, j * 20 / cols, 0);
 				particles.Add (particle);
 			}
 		}
 	}
 
+    void Update()
+    {
+        for (int i = 0; i < 5; ++i)
+        {
+            Debug.DrawLine(new Vector3(i, 0f, 0f), new Vector3(i + 5f, 0f, 0f), Color.red);
+            for (int j = 0; j < 5; ++j)
+            {
+                Debug.DrawLine(new Vector3(0f, j, 0f), new Vector3(0, j + 1, 0f), Color.red);
+            }
+        }
+    }
 	void FixedUpdate()
 	{
 		// Compute Forces

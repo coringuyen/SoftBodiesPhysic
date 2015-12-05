@@ -7,25 +7,24 @@ public class SpringDamper : MonoBehaviour {
 	public float DampingFactor;
 	public float Restlength;
 
-	Particle p1;
-	Particle p2;
+	public GameObject p1;
+	public GameObject p2;
 
 	void Start()
 	{
-		p1 = GetComponent<Particle> ();
-		p2 = GetComponent<Particle> ();
+
 	}
 
 	public void computeForce()
 	{
-		float particlesDistance = Vector3.Distance(p1.Position ,p2.Position);
-		Vector3 particlesDiff = p2.Position - p1.Position;
+		float particlesDistance = Vector3.Distance(p1.transform.position ,p2.transform.position);
+		Vector3 particlesDiff = p2.transform.position - p1.transform.position;
 		Vector3 normalizeParticlesDiff = particlesDiff.normalized;
 		
 		float springForce = - SpringConstant * (Restlength - particlesDistance);
 
-		float particle1Vel = Vector3.Dot (normalizeParticlesDiff, p1.Velocity); 
-		float particle2Vel = Vector3.Dot (normalizeParticlesDiff, p2.Velocity);
+		float particle1Vel = Vector3.Dot (normalizeParticlesDiff, p1.GetComponent<Particle>().Velocity); 
+		float particle2Vel = Vector3.Dot (normalizeParticlesDiff, p2.GetComponent<Particle>().Velocity);
 
 		float dampForce = - DampingFactor * (particle1Vel - particle2Vel);
 
@@ -34,7 +33,7 @@ public class SpringDamper : MonoBehaviour {
 		Vector3 force1 = springDamper * normalizeParticlesDiff;
 		Vector3 force2 = -force1;
 
-		p1.Force += force1;
-		p2.Force += force2;
+		p1.GetComponent<Particle>().Force += force1;
+		p2.GetComponent<Particle>().Force += force2;
 	}
 }

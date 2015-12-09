@@ -4,19 +4,22 @@ using System.Collections.Generic;
 
 public class ClothSimulation : MonoBehaviour 
 {
-	public GameObject ParticlesPreb;
-	public GameObject SpringsPreb;
-	List<GameObject> particles = new List<GameObject> ();
+	public GameObject ParticlesPreb; 
+    public GameObject RowSpringsPreb;
+    public GameObject ColSpringsPreb;
+    public GameObject LeftDSpringsPreb;
+    public GameObject RightDSpringsPreb;
+    List<GameObject> particles = new List<GameObject> ();
 	List<GameObject> springDampers = new List<GameObject> ();
 
 	public int rows; // how many particle for row
-	public int cols; // how many particle for col
+	public int cols; // how many particle for column
 	public int width, height; // width and height of the Grid entirely 
 
     // Generate a Grid
     void Start()
 	{
-        // generate Particle
+        // Spawn Particle
         GameObject particle;
 		for (int i = 0; i < rows; ++i) 
 		{
@@ -28,39 +31,58 @@ public class ClothSimulation : MonoBehaviour
 			}
 		}
 
-        // set the spring
+        // Spawn Spring
 		for(int i = 0; i < rows * cols; ++i)
 		{
+            // Spring for the row
             if (i + rows < rows * cols)
             {
-                GameObject RowSpring = Instantiate(SpringsPreb) as GameObject;
+                GameObject RowSpring = Instantiate(RowSpringsPreb) as GameObject;
                 RowSpring.transform.position = median_of_two_particles(particles[i], particles[i + rows]);
-
-                RowSpring.GetComponent<SpringDamper>().p1 = particles[i];
-                RowSpring.GetComponent<SpringDamper>().p2 = particles[i + rows];
-                RowSpring.transform.parent = particles[i].transform;
+                RowSpring.transform.localScale = SpringScale(particles[i], particles[i + rows]);
+                RowSpring.GetComponent<SpringDamper>().SetSpring(particles[i], particles[i + rows]);
             }
-
             
+            // Spring for the colum
 			if((i % cols) != rows - 1)
 			{
-				GameObject ColSpring = Instantiate(SpringsPreb) as GameObject;
+				GameObject ColSpring = Instantiate(ColSpringsPreb) as GameObject;
 				ColSpring.transform.position = median_of_two_particles(particles[i], particles[i + 1]);
-				ColSpring.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+                ColSpring.transform.localScale = SpringScale(particles[i], particles[i + 1]);
+                ColSpring.GetComponent<SpringDamper>().SetSpring(particles[i], particles[i + 1]);
 
-				ColSpring.GetComponent<SpringDamper>().p1 = particles[i];
-				ColSpring.GetComponent<SpringDamper>().p2 = particles[i + 1];
-				ColSpring.transform.parent = particles[i].transform;
-			}
+                GameObject LeftDSpring = Instantiate(LeftDSpringsPreb) as GameObject;
+                LeftDSpring.transform.position = median_of_two_particles(particles[i], particles[i + rows + 1]);
+                LeftDSpring.transform.localScale = SpringScale(particles[i], particles[i + rows + 1]);
+                LeftDSpring.GetComponent<SpringDamper>().SetSpring(particles[i], particles[i + rows + 1]);
+            }
+
 		}
 	
 	}
 
-    // find the mid point from the 2 particles position to set the Spring position
+    /// <summary>
+    /// Return a Vector3 median position  
+    /// </summary>
+    /// <param name="p1"> First Particle </param>
+    /// <param name="p2"> Second Particle </param>
+    /// <returns></returns>
     Vector3 median_of_two_particles(GameObject p1, GameObject p2)
     {
         Vector3 median = (p1.transform.position + p2.transform.position) / 2;
         return median;
+    }
+
+    /// <summary>
+    /// Return a Vector3 for Spring Scale
+    /// </summary>
+    /// <param name="p1"> First Particle </param>
+    /// <param name="p2"> Second Particle </param>
+    /// <returns></returns>
+    Vector3 SpringScale(GameObject p1, GameObject p2)
+    {
+        float Yscale = Vector3.Distance(p1.transform.position, p2.transform.position) / 2;
+        return new Vector3(0.05f, Yscale, 0.05f);
     }
 
 	void FixedUpdate()

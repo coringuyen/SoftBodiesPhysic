@@ -7,13 +7,21 @@ public class SpringDamper : MonoBehaviour {
 	public float DampingFactor;
 	public float Restlength;
 
-	public GameObject p1;
-	public GameObject p2;
+	private GameObject p1;
+	private GameObject p2;
 
 	void Start()
 	{
 
 	}
+
+
+    public void SetSpring(GameObject _p1, GameObject _p2)
+    {
+        p1 = _p1;
+        p2 = _p2;
+        transform.parent = _p1.transform;
+    }
 
 	public void computeForce()
 	{

@@ -19,6 +19,6 @@ public class Particle : MonoBehaviour
 	{
 		Acceleration = Force / mass;
 		Velocity = Velocity + Acceleration * Time.deltaTime;
-		transform.position = transform.position + Velocity * Time.deltaTime;
+		transform.position = Position + Velocity * Time.deltaTime;
 	}
 }

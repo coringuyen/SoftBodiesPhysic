@@ -20,7 +20,7 @@ public class SpringDamper : MonoBehaviour {
     {
         p1 = _p1;
         p2 = _p2;
-        transform.parent = _p1.transform;
+        transform.parent = _p2.transform;
     }
 
 	public void computeForce()

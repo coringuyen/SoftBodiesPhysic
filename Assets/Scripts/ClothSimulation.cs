@@ -20,6 +20,7 @@ public class ClothSimulation : MonoBehaviour
     void Start()
 	{
         // Spawn Particle
+        // particle position go by row then for each column with the gap from width and height
         GameObject particle;
 		for (int i = 0; i < rows; ++i) 
 		{
@@ -51,10 +52,24 @@ public class ClothSimulation : MonoBehaviour
                 ColSpring.transform.localScale = SpringScale(particles[i], particles[i + 1]);
                 ColSpring.GetComponent<SpringDamper>().SetSpring(particles[i], particles[i + 1]);
 
-                GameObject LeftDSpring = Instantiate(LeftDSpringsPreb) as GameObject;
-                LeftDSpring.transform.position = median_of_two_particles(particles[i], particles[i + rows + 1]);
-                LeftDSpring.transform.localScale = SpringScale(particles[i], particles[i + rows + 1]);
-                LeftDSpring.GetComponent<SpringDamper>().SetSpring(particles[i], particles[i + rows + 1]);
+                // Right diagonal spring
+                if (i + 1 < rows * cols && i + rows < rows * cols)
+                {
+                    GameObject RightDSpring = Instantiate(RightDSpringsPreb) as GameObject;
+                    RightDSpring.transform.position = median_of_two_particles(particles[i + 1], particles[i + rows]);
+                    RightDSpring.transform.localScale = SpringScale(particles[i + 1], particles[i + rows]);
+                    RightDSpring.GetComponent<SpringDamper>().SetSpring(particles[i + 1], particles[i + rows]);
+                }
+
+                // Left diagonal spring
+                if(i + rows + 1 < rows * cols)
+                {
+                    GameObject LeftDSpring = Instantiate(LeftDSpringsPreb) as GameObject;
+                    LeftDSpring.transform.position = median_of_two_particles(particles[i], particles[i + rows + 1]);
+                    LeftDSpring.transform.localScale = SpringScale(particles[i], particles[i + rows + 1]);
+                    LeftDSpring.GetComponent<SpringDamper>().SetSpring(particles[i], particles[i + rows + 1]);
+                }
+
             }
 
 		}
@@ -91,7 +106,7 @@ public class ClothSimulation : MonoBehaviour
 		// For each particle apply gravity
 		foreach (GameObject o in particles) 
 		{
-			Vector3 gravityForce = new Vector3(0f , -0.2f , 0f) * o.GetComponent<Particle>().mass; 
+			Vector3 gravityForce = new Vector3(0f , -9.8f , 0f) * o.GetComponent<Particle>().mass; 
 			o.GetComponent<Particle>().Force += gravityForce;
 		}
 

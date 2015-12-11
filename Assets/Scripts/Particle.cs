@@ -3,7 +3,12 @@ using System.Collections;
 
 public class Particle : MonoBehaviour 
 {
-	//public Vector3 Position;
+	public Vector3 Position
+    {
+        get { return transform.position; }
+        set { transform.position = value; }
+    }
+
 	public Vector3 Velocity;
 	public Vector3 Force;
 	public float mass;
@@ -12,7 +17,7 @@ public class Particle : MonoBehaviour
 	void Start()
 	{
 		Velocity = new Vector3 (0,0,0);
-		//Position = transform.position;
+		Position = transform.position;
 	}
 
 	public void EulerIntergration()
@@ -21,7 +26,7 @@ public class Particle : MonoBehaviour
         {
             Vector3 Acceleration = Force / mass;
             Velocity += Acceleration * Time.deltaTime;
-            transform.position += Velocity * Time.deltaTime;
+            Position += Velocity * Time.deltaTime;
         }
 	}
 }

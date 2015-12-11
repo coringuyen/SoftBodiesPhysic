@@ -7,13 +7,8 @@ public class SpringDamper : MonoBehaviour {
 	public float DampingFactor;
 	public float Restlength;
 
-	private Particle p1;
-	private Particle p2;
-
-	void Start()
-	{
-
-	}
+	public Particle p1;
+	public Particle p2;
 
 
     public void SetSpring(Particle _p1, Particle _p2)
@@ -24,8 +19,8 @@ public class SpringDamper : MonoBehaviour {
 
 	public void computeForce()
 	{
-		float particlesDistance = Vector3.Distance(p1.transform.position ,p2.transform.position);
-		Vector3 particlesDiff = p2.transform.position - p1.transform.position;
+		float particlesDistance = Vector3.Distance(p1.Position ,p2.Position);
+		Vector3 particlesDiff = p2.Position - p1.Position;
 		Vector3 normalizeParticlesDiff = particlesDiff.normalized;
 		
 		float springForce = - SpringConstant * (Restlength - particlesDistance);

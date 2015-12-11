@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,10 +15,12 @@ public class ClothSimulation : MonoBehaviour
 	public int cols; // how many particle for column
 	public int width, height; // width and height of the Grid entirely 
 
-    public Slider SpringConstant;
-    public Slider DampingFactor;
-    public Slider RestLength;
-    public Slider AirBlow;
+    ClothGUI clothgui;
+
+    void Start()
+    {
+        clothgui = GetComponent<ClothGUI>();
+    }
 
     void FixedUpdate()
     {
@@ -34,9 +35,9 @@ public class ClothSimulation : MonoBehaviour
         //For each Spring - Damper compute and apply Forces
         foreach (SpringDamper s in springDampers)
         {
-            s.SpringConstant = SpringConstant.value;
-            s.DampingFactor = DampingFactor.value;
-            s.Restlength = RestLength.value;
+            s.SpringConstant = clothgui.SpringConstant.value;
+            s.DampingFactor = clothgui.DampingFactor.value;
+            s.Restlength = clothgui.RestLength.value;
             s.computeForce();
         }
 
@@ -51,7 +52,7 @@ public class ClothSimulation : MonoBehaviour
         // For each particle apply Euler Intergration
         foreach (Particle o in particles)
         {
-            o.EulerIntergration();
+            o.EulerIntegration();
         }
     }
 

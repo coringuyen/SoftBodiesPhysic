@@ -20,7 +20,7 @@ public class Particle : MonoBehaviour
 		Position = transform.position;
 	}
 
-	public void EulerIntergration()
+	public void EulerIntegration()
 	{
         if (!isAnchor)
         {

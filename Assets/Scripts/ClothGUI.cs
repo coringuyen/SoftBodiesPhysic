@@ -10,9 +10,11 @@ public class ClothGUI : MonoBehaviour {
     public Slider AirBlow;
     public Button Exit;
     public Button CreateCloth;
+    public Button DestroyCloth;
 
     void Start ()
     {
+        DestroyCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.9f, 0);
         CreateCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.54f, 0);
         Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
         RestLength.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.9f, 0);
@@ -24,8 +26,13 @@ public class ClothGUI : MonoBehaviour {
         Exit.gameObject.SetActive(true);
     }
 
-    public void moveExitButton()
+    public void moveExitToTheConner()
     {
         Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);
+    }
+
+    public void moveExitBack()
+    {
+        Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
     }
 }

@@ -6,6 +6,7 @@ public class ClothSimulation : MonoBehaviour
 {
 	public Particle ParticlesPreb; 
     public SpringDamper SpringsPreb;
+    public Triangle TrianglePreb;
    
     List<Particle> particles = new List<Particle>();
 	List<SpringDamper> springDampers = new List<SpringDamper>();
@@ -28,45 +29,59 @@ public class ClothSimulation : MonoBehaviour
         // For each particle apply gravity
         foreach (Particle o in particles)
         {
-            Vector3 gravityForce = new Vector3(0f, -9.8f, 0f) * o.mass;
-            o.Force = gravityForce;
+            if (o)
+            {
+                Vector3 gravityForce = new Vector3(0f, -9.8f, 0f) * o.mass;
+                o.Force = gravityForce;
+            }
         }
 
         //For each Spring - Damper compute and apply Forces
         foreach (SpringDamper s in springDampers)
         {
-            s.SpringConstant = clothgui.SpringConstant.value;
-            s.DampingFactor = clothgui.DampingFactor.value;
-            s.Restlength = clothgui.RestLength.value;
-            s.computeForce();
+            if (s)
+            {
+                s.SpringConstant = clothgui.SpringConstant.value;
+                s.DampingFactor = clothgui.DampingFactor.value;
+                s.Restlength = clothgui.RestLength.value;
+                s.computeForce();
+            }
         }
 
         // for each triangle compute and apply Aerodynamic Force
-        //foreach(Triangle t in triangles)
-        //{
-        //    //t.airVelocity.z = AirBlow.value;
-        //    t.computeForce();
-        //}
+        foreach (Triangle t in triangles)
+        {
+            if (t)
+            {
+                t.airVelocity.z = clothgui.AirBlow.value;
+                t.computeForce();
+            }
+        }
 
         //Intergrate Motion
         // For each particle apply Euler Intergration
         foreach (Particle o in particles)
         {
-            o.EulerIntegration();
+            if (o)
+            { o.EulerIntegration(); }
         }
     }
 
 
     void Update()
     {
+        // Credit: Mathhew
         // Update spring as the particle position change
         int i = 0;
         foreach (SpringDamper s in springDampers)
         {
-            LineRenderer spring = s.GetComponent<LineRenderer>();
-            spring.SetPosition(0, springDampers[i].p1.Position);
-            spring.SetPosition(1, springDampers[i].p2.Position);
-            i++;
+            if (s)
+            {
+                LineRenderer spring = s.GetComponent<LineRenderer>();
+                spring.SetPosition(0, springDampers[i].p1.Position);
+                spring.SetPosition(1, springDampers[i].p2.Position);
+                i++;
+            }
         }
     }
 
@@ -145,20 +160,24 @@ public class ClothSimulation : MonoBehaviour
         {
             if (i + 1 < rows * cols && i + rows < rows * cols && i + rows + 1 < rows * cols)
             {
-                Triangle firstTriangle = GetComponent<Triangle>();
-                firstTriangle.makeTraingle(particles[i], particles[i + 1], particles[i + rows]);
+                Triangle firstTriangle = Instantiate(TrianglePreb);
+                firstTriangle.transform.parent = transform;
+                firstTriangle.makeTriangle(particles[i], particles[i + 1], particles[i + rows]);
                 triangles.Add(firstTriangle);
 
-                Triangle secondTriangle = GetComponent<Triangle>();
-                secondTriangle.makeTraingle(particles[i], particles[i + 1], particles[i + rows + 1]);
+                Triangle secondTriangle = Instantiate(TrianglePreb);
+                secondTriangle.transform.parent = transform;
+                secondTriangle.makeTriangle(particles[i], particles[i + 1], particles[i + rows + 1]);
                 triangles.Add(secondTriangle);
 
-                Triangle thirdTriangle = GetComponent<Triangle>();
-                thirdTriangle.makeTraingle(particles[i + 1], particles[i + rows], particles[i + rows + 1]);
+                Triangle thirdTriangle = Instantiate(TrianglePreb);
+                thirdTriangle.transform.parent = transform;
+                thirdTriangle.makeTriangle(particles[i + 1], particles[i + rows], particles[i + rows + 1]);
                 triangles.Add(thirdTriangle);
 
-                Triangle fourTriangle = GetComponent<Triangle>();
-                fourTriangle.makeTraingle(particles[i], particles[i + rows], particles[i + rows + 1]);
+                Triangle fourTriangle = Instantiate(TrianglePreb);
+                fourTriangle.transform.parent = transform;
+                fourTriangle.makeTriangle(particles[i], particles[i + rows], particles[i + rows + 1]);
                 triangles.Add(fourTriangle);
             }
         }
@@ -168,9 +187,30 @@ public class ClothSimulation : MonoBehaviour
 
     void SetAnchor()
     {
-        particles[9].GetComponent<Particle>().isAnchor = true;
-        particles[99].GetComponent<Particle>().isAnchor = true;
-        //particles[0].GetComponent<Particle>().isAnchor = true;
-        //particles[90].GetComponent<Particle>().isAnchor = true;
+        particles[0].isAnchor = true;
+        particles[cols - 1].isAnchor = true;
+        //particles[rows * cols - 1].isAnchor = true;
+        //particles[rows * cols - cols].isAnchor = true;
+    }
+
+    public void DestroyCloth()
+    {
+        foreach (Particle p in particles)
+        {
+            Destroy(p.gameObject);
+        }
+        foreach (SpringDamper s in springDampers)
+        {
+            Destroy(s.gameObject);
+        }
+
+        foreach (Triangle t in triangles)
+        {
+            Destroy(t.gameObject);
+        }
+
+        springDampers = new List<SpringDamper>();
+        particles = new List<Particle>();
+        triangles = new List<Triangle>();
     }
 }

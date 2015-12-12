@@ -5,8 +5,8 @@ public class Particle : MonoBehaviour
 {
 	public Vector3 Position
     {
-        get { return transform.position; }
-        set { transform.position = value; }
+            get { return transform.position; }
+            set {transform.position = value; }
     }
 
 	public Vector3 Velocity;

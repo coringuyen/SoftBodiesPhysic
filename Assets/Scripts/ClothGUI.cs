@@ -33,6 +33,18 @@ public class ClothGUI : MonoBehaviour {
 
         CreateCloth.gameObject.SetActive(true);
         Exit.gameObject.SetActive(true);
+
+        
+    }
+
+    void Update()
+    {
+        if (Row.text != "" && Column.text != "" && Width.text != "" && Height.text != "")
+        {
+            CreateCloth.interactable = true;
+        }
+        else
+            CreateCloth.interactable = false;
     }
 
     public void moveExitToTheConner()

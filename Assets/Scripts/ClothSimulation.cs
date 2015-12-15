@@ -184,6 +184,11 @@ public class ClothSimulation : MonoBehaviour
             Destroy(t.gameObject);
         }
 
+        clothgui.Row.text = "";
+        clothgui.Column.text = "";
+        clothgui.Width.text = "";
+        clothgui.Height.text = "";
+
         springDampers = new List<SpringDamper>();
         particles = new List<Particle>();
         triangles = new List<Triangle>();

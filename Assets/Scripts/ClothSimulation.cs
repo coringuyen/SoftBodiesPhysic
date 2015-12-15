@@ -12,9 +12,9 @@ public class ClothSimulation : MonoBehaviour
 	List<SpringDamper> springDampers = new List<SpringDamper>();
     List<Triangle> triangles = new List<Triangle>();
 
-	public int rows; // how many particle for row
-	public int cols; // how many particle for column
-	public int width, height; // width and height of the Grid entirely 
+	private int rows; // how many particle for row
+	private int cols; // how many particle for column
+	private int width, height; // width and height of the Grid entirely 
 
     ClothGUI clothgui;
 
@@ -67,30 +67,17 @@ public class ClothSimulation : MonoBehaviour
         }
     }
 
-
-    void Update()
-    {
-        // Credit: Mathhew
-        // Update spring as the particle position change
-        int i = 0;
-        foreach (SpringDamper s in springDampers)
-        {
-            if (s)
-            {
-                LineRenderer spring = s.GetComponent<LineRenderer>();
-                spring.SetPosition(0, springDampers[i].p1.Position);
-                spring.SetPosition(1, springDampers[i].p2.Position);
-                i++;
-            }
-        }
-    }
-
     // Generate a Grid
     public void ClothSpawn()
 	{
-		// Spawn Particle
-		// particle position go by row then for each column with the gap from width and height
-		Particle particle;
+        rows = int.Parse(clothgui.Row.text);
+        cols = int.Parse(clothgui.Column.text);
+        width = int.Parse(clothgui.Width.text);
+        height = int.Parse(clothgui.Height.text);
+
+        // Spawn Particle
+        // particle position go by row then for each column with the gap from width and height
+        Particle particle;
 		for (int i = 0; i < rows; ++i) 
 		{
 			for (int j = 0; j < cols; ++j) 
@@ -110,9 +97,6 @@ public class ClothSimulation : MonoBehaviour
 			{
 				SpringDamper RowSpring = Instantiate(SpringsPreb);
                 RowSpring.transform.parent = transform;
-                LineRenderer spring = RowSpring.GetComponent<LineRenderer>();
-                spring.SetPosition(0, particles[i].Position);
-                spring.SetPosition(1, particles[i + rows].Position);
                 RowSpring.SetSpring(particles[i], particles[i + rows]);
                 springDampers.Add(RowSpring);
 			}
@@ -122,9 +106,6 @@ public class ClothSimulation : MonoBehaviour
 			{
 				SpringDamper ColSpring = Instantiate(SpringsPreb);
                 ColSpring.transform.parent = transform;
-                LineRenderer spring = ColSpring.GetComponent<LineRenderer>();
-                spring.SetPosition(0, particles[i].Position);
-                spring.SetPosition(1, particles[i + 1].Position);
                 ColSpring.SetSpring(particles[i], particles[i + 1]);
                 springDampers.Add(ColSpring);
 
@@ -133,9 +114,6 @@ public class ClothSimulation : MonoBehaviour
 				{
 					SpringDamper RightDSpring = Instantiate(SpringsPreb);
                     RightDSpring.transform.parent = transform;
-                    LineRenderer springR = RightDSpring.GetComponent<LineRenderer>();
-                    springR.SetPosition(0, particles[i + 1].Position);
-                    springR.SetPosition(1, particles[i + rows].Position);
                     RightDSpring.SetSpring(particles[i + 1], particles[i + rows]);
                     springDampers.Add(RightDSpring);
                 }
@@ -145,9 +123,6 @@ public class ClothSimulation : MonoBehaviour
 				{
 					SpringDamper LeftDSpring = Instantiate(SpringsPreb);
                     LeftDSpring.transform.parent = transform;
-                    LineRenderer springL = LeftDSpring.GetComponent<LineRenderer>();
-                    springL.SetPosition(0, particles[i].Position);
-                    springL.SetPosition(1, particles[i + rows + 1].Position);
                     LeftDSpring.SetSpring(particles[i], particles[i + rows + 1]);
                     springDampers.Add(LeftDSpring);
                 }
@@ -187,9 +162,9 @@ public class ClothSimulation : MonoBehaviour
 
     void SetAnchor()
     {
-        particles[0].isAnchor = true;
+        //particles[0].isAnchor = true;
         particles[cols - 1].isAnchor = true;
-        //particles[rows * cols - 1].isAnchor = true;
+        particles[rows * cols - 1].isAnchor = true;
         //particles[rows * cols - cols].isAnchor = true;
     }
 

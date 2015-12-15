@@ -11,6 +11,10 @@ public class ClothGUI : MonoBehaviour {
     public Button Exit;
     public Button CreateCloth;
     public Button DestroyCloth;
+    public InputField Row;
+    public InputField Column;
+    public InputField Width;
+    public InputField Height;
 
     void Start ()
     {
@@ -21,6 +25,11 @@ public class ClothGUI : MonoBehaviour {
         DampingFactor.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.8f, 0);
         SpringConstant.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.7f, 0);
         AirBlow.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.6f, 0);
+
+        Row.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.3f, Screen.height * 0.8f, 0);
+        Column.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.42f, Screen.height * 0.8f, 0);
+        Width.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.58f, Screen.height * 0.8f, 0);
+        Height.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.7f, Screen.height * 0.8f, 0);
 
         CreateCloth.gameObject.SetActive(true);
         Exit.gameObject.SetActive(true);

@@ -18,6 +18,7 @@ public class ClothGUI : MonoBehaviour {
 
     void Start ()
     {
+        // set position of all the GUI depend on the screen position
         DestroyCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.9f, 0);
         CreateCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.54f, 0);
         Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
@@ -39,6 +40,7 @@ public class ClothGUI : MonoBehaviour {
 
     void Update()
     {
+        // checking if user give in the input for all the inputfield
         if (Row.text != "" && Column.text != "" && Width.text != "" && Height.text != "")
         {
             CreateCloth.interactable = true;
@@ -49,11 +51,13 @@ public class ClothGUI : MonoBehaviour {
 
     public void moveExitToTheConner()
     {
+        // move exit button to bottom right
         Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);
     }
 
     public void moveExitBack()
     {
+        // move exit button back to the origin position
         Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
     }
 }

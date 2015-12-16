@@ -3,18 +3,19 @@ using System.Collections;
 
 public class SpringDamper : MonoBehaviour {
 
-	public float SpringConstant;
-	public float DampingFactor;
-	public float Restlength;
+	public float SpringConstant; // stiffness
+	public float DampingFactor; // velocity restriction
+	public float Restlength; // maintain length
 
 	public Particle p1;
 	public Particle p2;
 
     void Update()
     {
-            LineRenderer spring = GetComponent<LineRenderer>();
-            spring.SetPosition(0, p1.Position);
-            spring.SetPosition(1, p2.Position);
+        // Update the string as the position change
+        LineRenderer spring = GetComponent<LineRenderer>();
+        spring.SetPosition(0, p1.Position);
+        spring.SetPosition(1, p2.Position);
     }
 
     public void SetSpring(Particle _p1, Particle _p2)

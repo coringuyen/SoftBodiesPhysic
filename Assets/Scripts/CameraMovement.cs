@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CameraMovement: MonoBehaviour
 {
+    //Credit: Eric Mouledoux
+
     public float speed;			// The speed the camera will move or rotate at 
  	public KeyCode resetKey;	// The key that will be used to reset the camera's transform 
  

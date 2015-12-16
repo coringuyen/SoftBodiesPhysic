@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class Particle : MonoBehaviour 
-{
+{ 
+    // this game object position is will assign to Position
 	public Vector3 Position
     {
             get { return transform.position; }
-            set {transform.position = value; }
+            set { transform.position = value; }
     }
 
 	public Vector3 Velocity;

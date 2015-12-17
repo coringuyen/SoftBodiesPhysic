@@ -32,15 +32,12 @@ public class Triangle : MonoBehaviour {
 
         Vector3 averageVel = (p1.Velocity + p2.Velocity + p3.Velocity) / 3;
         averageVel -= airVelocity;
-        //float v2 = averageVel.sqrMagnitude;
 
         Vector3 crossProductof3points = Vector3.Cross(part1, part2);
         Vector3 Trianglenormal = crossProductof3points / crossProductof3points.magnitude;
-        //float TriangleArea = 0.5f * crossProductof3points.magnitude;
-        //float crossSectionalArea = TriangleArea * Vector3.Dot(averageVel, Trianglenormal) / averageVel.magnitude;
 
         Vector3 v2_an = ((0.5f * Vector3.Dot(averageVel, Trianglenormal) * averageVel.magnitude) / crossProductof3points.magnitude) * crossProductof3points;
-        //Vector3 aeroForce = -0.5f * airDensity * v2 * dragCoefficient * crossSectionalArea * Trianglenormal;
+        
         Vector3 aeroForce = -0.5f * airDensity * dragCoefficient * v2_an;
 
         aeroForce /= 3f;

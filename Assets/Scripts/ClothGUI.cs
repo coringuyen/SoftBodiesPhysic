@@ -8,7 +8,7 @@ public class ClothGUI : MonoBehaviour {
     public Slider DampingFactor;
     public Slider RestLength;
     public Slider AirBlow;
-    public Button Exit;
+    public Button Instruction;
     public Button CreateCloth;
     public Button DestroyCloth;
     public InputField Row;
@@ -21,7 +21,7 @@ public class ClothGUI : MonoBehaviour {
         // set position of all the GUI depend on the screen position
         DestroyCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.9f, 0);
         CreateCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.54f, 0);
-        Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
+        Instruction.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
         RestLength.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.9f, 0);
         DampingFactor.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.8f, 0);
         SpringConstant.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.7f, 0);
@@ -33,9 +33,7 @@ public class ClothGUI : MonoBehaviour {
         Height.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.7f, Screen.height * 0.8f, 0);
 
         CreateCloth.gameObject.SetActive(true);
-        Exit.gameObject.SetActive(true);
-
-        
+        Instruction.gameObject.SetActive(true);
     }
 
     void Update()
@@ -47,17 +45,39 @@ public class ClothGUI : MonoBehaviour {
         }
         else
             CreateCloth.interactable = false;
+
     }
 
-    public void moveExitToTheConner()
+    void turnOffInput()
     {
-        // move exit button to bottom right
-        Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);
+        Row.gameObject.SetActive(false);
+        Column.gameObject.SetActive(false);
+        Width.gameObject.SetActive(false);
+        Height.gameObject.SetActive(false);
     }
 
-    public void moveExitBack()
+    void turnOnInput()
     {
-        // move exit button back to the origin position
-        Exit.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
+        Row.gameObject.SetActive(true);
+        Column.gameObject.SetActive(true);
+        Width.gameObject.SetActive(true);
+        Height.gameObject.SetActive(true);
     }
+
+    void turnOffSlider()
+    {
+
+    }
+
+    //public void moveExitToTheConner()
+    //{
+    //    // move exit button to bottom right
+    //    Instruction.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);
+    //}
+
+    //public void moveExitBack()
+    //{
+    //    // move exit button back to the origin position
+    //    Instruction.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);
+    //}
 }

@@ -162,10 +162,19 @@ public class ClothSimulation : MonoBehaviour
 
     void SetAnchor()
     {
-        //particles[0].isAnchor = true;
-        particles[cols - 1].isAnchor = true;
-        particles[rows * cols - 1].isAnchor = true;
-        //particles[rows * cols - cols].isAnchor = true;
+        if (clothgui.anchor2.isOn == true)
+        {
+            particles[cols - 1].isAnchor = true;
+            particles[rows * cols - 1].isAnchor = true;
+        }
+
+        if (clothgui.anchor4.isOn == true)
+        {
+            particles[0].isAnchor = true;
+            particles[cols - 1].isAnchor = true;
+            particles[rows * cols - 1].isAnchor = true;
+            particles[rows * cols - cols].isAnchor = true;
+        }
     }
 
     public void DestroyCloth()

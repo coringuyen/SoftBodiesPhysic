@@ -21,6 +21,9 @@ public class ClothGUI : MonoBehaviour {
     public Text instructions;
     public Button BackToMenu;
     public Button CameraInstruction;
+    public RawImage CameraInstructionBG;
+    public Text camerainstructions;
+    public Button BackToCloth;
 
     float springcontant, dampingfactor, restlength, air;
 
@@ -30,10 +33,10 @@ public class ClothGUI : MonoBehaviour {
         DestroyCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.9f, 0);
         CreateCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.45f, 0);
         Instruction.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.5f, Screen.height * 0.3f, 0);
-        RestLength.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.9f, 0);
-        DampingFactor.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.8f, 0);
-        SpringConstant.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.7f, 0);
-        AirBlow.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.15f, Screen.height * 0.6f, 0);
+        RestLength.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.18f, Screen.height * 0.9f, 0);
+        DampingFactor.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.18f, Screen.height * 0.8f, 0);
+        SpringConstant.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.18f, Screen.height * 0.7f, 0);
+        AirBlow.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.18f, Screen.height * 0.6f, 0);
 
         Row.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.3f, Screen.height * 0.72f, 0);
         Column.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.42f, Screen.height * 0.72f, 0);
@@ -48,6 +51,9 @@ public class ClothGUI : MonoBehaviour {
         BackToMenu.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.1f, Screen.height * 0.93f, 0);
 
         CameraInstruction.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);
+        CameraInstructionBG.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
+        camerainstructions.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
+        BackToCloth.GetComponent<RectTransform>().position = new Vector3(Screen.width * 0.1f, Screen.height * 0.93f, 0);
 
         springcontant = SpringConstant.value;
         dampingfactor = DampingFactor.value;
@@ -56,6 +62,13 @@ public class ClothGUI : MonoBehaviour {
 
         CreateCloth.gameObject.SetActive(true);
         Instruction.gameObject.SetActive(true);
+        anchor2.gameObject.SetActive(true);
+        anchor4.gameObject.SetActive(true);
+        Row.gameObject.SetActive(true);
+        Column.gameObject.SetActive(true);
+        Width.gameObject.SetActive(true);
+        Height.gameObject.SetActive(true);
+        anchor2.isOn = true;
     }
 
     void Update()

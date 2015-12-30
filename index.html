@@ -343,7 +343,7 @@ Data members<br/>
 	<p><span style="padding-left:68px;">Name: Exit</span><br/>
     <span style="padding-left:68px;">Description: when this button press the application will quit</span></p>
 	<p><span style="padding-left:68px;">Name: createCloth</span><br/>
-	<span style="padding-left:68px;">Description: spawn the cloth(Grid). Set all the sliders to active, and put the exit <span style="padding-left:68px;"> button to bottom right corner</span></p>
+	<span style="padding-left:68px;">Description: spawn the cloth(Grid). Set all the sliders to active, and put the exit <span style="padding-left:68px;">button to bottom right corner</span></p>
 	<p><span style="padding-left:68px;">Name: DestroyCloth</span><br/>
     <span style="padding-left:68px;">Description: destroy the cloth(Grid)</span></p>
     <p><span style="padding-left:68px;">Name: Row</span><br/>
@@ -358,16 +358,6 @@ Data members<br/>
 <p>Function: Start<br/>
 Parameters: n/a<br/>
 Description: set all the GUI elements position depend on the screen width and height<br/>
-Return: n/a</p>
-
-<p>Function: moveExitToTheConner<br/>
-Parameters: n/a<br/>
-Description: set the Exit button position to the bottom right if the screen<br/>
-Return: n/a</p>
-
-<p>Function: moveExitBack<br/>
-Parameters: n/a<br/>
-Description: move the Exit button position back to it origin position<br/>
 Return: n/a</p>
 
 <p>Function: Update<br/>
@@ -557,8 +547,20 @@ using System.Collections.Generic;</p>
 #Return: n/a</p>
 <pre><code>void SetAnchor()
 {
-    particles[0].isAnchor = true;
-    particles[rows * cols - cols].isAnchor = true;
+    if (clothgui.anchor2.isOn == true)
+        {
+            particles[cols - 1].isAnchor = true;
+            particles[rows * cols - 1].isAnchor = true;
+        }
+
+        if (clothgui.anchor4.isOn == true)
+        {
+            particles[0].isAnchor = true;
+            particles[cols - 1].isAnchor = true;
+            particles[rows * cols - 1].isAnchor = true;
+            particles[rows * cols - cols].isAnchor = true;
+        }
+    }
 }</code></pre>
 
 <p><strong>File</strong>: Particle.cs<br/>
@@ -747,28 +749,7 @@ using System.Collections;</p>
 
 	CreateCloth.gameObject.SetActive(true);
 	Exit.gameObject.SetActive(true);
-
-
-}</code></pre>
-
-<p>#Function: moveExitToTheConner<br/>
-#Parameters: n/a<br/>
-#Description: set the Exit button position to the bottom right if the screen<br/>
-#Return: n/a</p>
-<pre><code>public void moveExitToTheConner()
-{
-    Exit.GetComponent().position = new Vector3(Screen.width * 0.85f, 
-    Screen.height * 0.1f, 0);
-}</code></pre>
-
-<p>#Function: moveExitBack<br/>
-#Parameters: n/a<br/>
-#Description: move the Exit button position back to it origin position<br/>
-#Return: n/a</p>
-<pre><code>public void moveExitBack()
-{
-    Exit.GetComponent().position = new Vector3(Screen.width * 0.5f, 
-    Screen.height * 0.44f, 0);
+	
 }</code></pre>
 
 <p>#Function: Update<br/>

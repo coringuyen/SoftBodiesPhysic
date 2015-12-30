@@ -1,0 +1,622 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+{\*\generator Riched20 10.0.10240}\viewkind4\uc1 
+\pard\f0\fs22\lang1033\par
+\par
+Problem Description\par
+\par
+Name: Cloth Simulation\par
+Problem Statement: Implement cloth simulation using particle, spring-damper, and triangle. Under two step of physic simulation is compute forces, and integrate motion. \par
+Problem Specification: \par
+        Compute Force:  For each particle apply Gravity force.\par
+\tab\tab            For each spring-damper compute spring force then apply the force to \par
+                                   the two particles that this spring-damper connected to.\par
+\tab\tab            For each triangle compute aerodynamic force then apply the force to the \par
+ \tab\tab            3 particles that form the triangle.\par
+        Integrate Motion: For each particle apply Euler Integration.\par
+\par
+User Interface Information\par
+\par
+Name: SpringConstant\par
+Description: stiffness of the spring\par
+\par
+Name: DampingFactor\par
+Description: spring velocity restriction\par
+\par
+Name: RestLength\par
+Description: spring length that need to maintain\par
+\par
+Name: Air Blow (Z)\par
+Description: the direction of air will blow on z axis\par
+\par
+Name: Create Cloth\par
+Description: Instantiate the Grid\par
+\par
+Name: Exit\par
+Description: quit the application\par
+\par
+Name: Destroy\par
+Description: destroy the cloth(Grid)\par
+\par
+Name: Row\par
+Description: number of row for particle\par
+\par
+Name: Column\par
+Description: number of column for particle\par
+Name: Width\par
+Description: the width of the cloth. How long the cloth would be\par
+\par
+Name: Height\par
+Description: the height of the cloth. How tall the cloth would be\par
+\par
+Functions Information\par
+\par
+File: ClothSimulation.cs\par
+Class: ClothSimulation\par
+Data members:\par
+\tab Name: ParticlesPreb\par
+\tab Description: the gameobject that will use to instantiate \tab particle\par
+\tab Name: SpringsPreb\par
+\tab Description: the gameobject that will use to instantiate \tab spring-damper\par
+\tab Name: TrianglePreb\par
+\tab Description: the gameobject that will use to instantiate \tab triangle\par
+\tab Name: rows\par
+\tab Description: number of rows the particle will spawn in \par
+\tab Name: cols\par
+\tab Description: number of column the particle will spawn in\par
+\tab Name: width\par
+\tab Description: Entire width of cloth. Also, give the space\tab  \tab between particles on row\par
+\tab Name: height\par
+\tab Description: Entire height of cloth. This also give the \tab space between particles on column\par
+\tab Name: clothgui\par
+\tab Description: to access ClothGUI class data members\par
+\tab Name: particles\par
+\tab Description: a list to store particle\par
+\tab Name: springDampers\par
+\tab Description: a list to store spring-damper\par
+\tab Name: triangles\par
+\tab Description: a list to store triangle\par
+\par
+Function: SetAnchor\par
+Parameters: n/a\par
+Description: Set 2 as a pin-point to hold up the cloth(Grid)\par
+Return: n/a\par
+\par
+Function: ClothSpawn\par
+Parameters: n/a\par
+Description: Instantiate the cloth(Grid) using particle, spring-damper, triangle and SetAnchor function\par
+Return: n/a\par
+\par
+Function: FixedUpdate\par
+Parameters: n/a\par
+Description: compute forces and integrate motion\par
+Return: n/a\par
+\par
+Function: Start\par
+Parameters: n/a\par
+Description: assign clothgui to GetComponent of class ClothGUI\par
+Return: n/a\par
+\par
+Function: DestroyCloth\par
+Parameters: n/a\par
+Description: destroy cloth at run time. All the lists assign to a new list. Also, reset InputField\par
+Return: n/a\par
+\par
+File: Particle.cs\par
+Class: Particle\par
+Data members\par
+\tab Name: Position\par
+\tab Description: use to get, and update particle world space \tab position\par
+\tab Name: Velocity\par
+\tab Description: particle speed with direction\par
+\tab Name: Force\par
+\tab Description: using this force to calculate Acceleration from \tab Newton\rquote s Second Law\par
+\tab Name: mass\par
+\tab Description: weight of the particle\par
+\tab Name: isAnchor\par
+\tab Description: if the particle is anchor, no calculation on it\par
+\par
+Function: EulerIntegration \par
+Parameters: n/a\par
+Description: integrate particle motion by calculating acceleration with Newton\rquote s second law then add it to the particle Velocity with the time that past by. Update particle position with that Velocity also with the time that past by. This calculation won\rquote t apply to the particle that is anchor\par
+Return: n/a\par
+\par
+Function: Start\par
+Parameter: n/a\par
+Description: Zero out Velocity, and assign Position to this gameobject current position that this script attach to\par
+Return: n/a \par
+\par
+File: SpringDamper.cs\par
+Class: SpringDamper\par
+Data members\par
+\tab Name: SpringConstant\par
+\tab Description: the coefficient to control the stiffness of the \tab spring\par
+\tab Name: DampingFactor\par
+\tab Description: the coefficient to restrict the spring velocity \tab so it won\rquote t go crazy\par
+\tab Name: RestLength\par
+\tab Description: the coefficient for spring length that need to \tab be maintain\par
+\tab Name: p1\par
+\tab Description: the first particle that this spring connect to\par
+\tab Name: p2\par
+\tab Description: the second particle that this spring connect to\par
+\par
+Function: SetSpring\par
+Parameters: Particle _p1, Particle _p2\par
+Description: _p1 and _p2 are the two particles that this spring connected to. Use _p1 and _p2 to get the information of which particle it is, then assign them to p1 and p2 data members\par
+Return: n/a\par
+\par
+Function: computeForce\par
+Parameters: n/a\par
+Description: Calculate spring force from the two particles that this spring connected to, then apply that force to the particles force\par
+Return: n/a\par
+\par
+Function: Update\par
+Parameters: n/a\par
+Description: update spring as the particle position change\par
+Return: n/a\par
+\par
+File: Triangle.cs\par
+Class: Triangle\par
+Data members\par
+\tab Name: p1\par
+
+\pard\li720 Description: the first particle to form the triangle\par
+Name: p2\par
+Description: the second particle to form the triangle\par
+Name: p3\par
+Description: the third particle to form the triangle\par
+Name: airVelocity\par
+Description: air direction\par
+Name: airDensity\par
+Description: how strong the air will blow\par
+Name: dragCoefficient\par
+Description: how much the object will resist from the air\par
+
+\pard\par
+Function: Start\par
+Parameters: n/a\par
+Description: zero out airVelocity, assign airDensity to 1, and dragCoefficient to 0.5\par
+Return: n/a\par
+\par
+Function: makeTriangle\par
+Parameters: Particle _p1, Particle _p2, Particle _p3\par
+Description: _p1, _p2, and _p3 are the three particles that going to form the triangle. Takes in three particles to get the information of which particle belong to this triangle \par
+Return:n/a\par
+\par
+Function: computeForce\par
+Parameters: n/a\par
+Description: computing aerodynamic force for the triangle, then apply for each particle force of the triangle\par
+Return: n/a\par
+\par
+File: Exit.cs\par
+Class: Exit\par
+Data members\par
+\tab n/a\par
+\par
+Function: exitApplication\par
+Parameters: n/a\par
+Description: quit the application\par
+Return: n/a\par
+\par
+File: ClothGUI.cs\par
+Class: ClothGUI\par
+Data members\par
+\tab Name: SpringConstant\par
+\tab Description: user can change the stiffness of the spring\par
+\tab Name: DampingFactor\par
+\tab Description: user can change the velocity restriction of the \tab spring\par
+\tab Name: RestLength\par
+\tab Description:  user can change the length of the spring that \tab need to be maintain\par
+\tab Name: AirBlow\par
+\tab Description: user can put some air on the z axis\par
+\tab Name: Exit\par
+\tab Description: when this button press the application will \tab quit\par
+\tab Name: createCloth\par
+\tab Description: spawn the cloth(Grid). Set all the sliders to \tab active, and put the exit button to   bottom right corner\par
+\tab Name: DestroyCloth\par
+\tab Description: destroy the cloth(Grid)\par
+\tab Name: Row\par
+\tab Description: to get the user input for rows\par
+\tab Name: Column\par
+\tab Description: to get the user input for cols\par
+\tab Name: Width\par
+\tab Description: to get the user input for width\par
+\tab Name: Height\par
+\tab Description: to get the user input for height\par
+Function: Start\par
+Parameters: n/a\par
+Description: set all the GUI elements position depend on the screen width and height\par
+Return: n/a\par
+\par
+Function: moveExitToTheConner\par
+Parameters: n/a\par
+Description: set the Exit button position to the bottom right if the screen\par
+Return: n/a\par
+\par
+Function: moveExitBack\par
+Parameters: n/a\par
+Description: move the Exit button position back to it origin position\par
+Return: n/a\par
+\par
+Function: Update\par
+Parameters: n/a\par
+Description: Checking if the user input on the InputField. If user did, Create Cloth button is able to click . If user didn\rquote t, Create Cloth button is disable\par
+Return: n/a\par
+\par
+Implementation\par
+File: ClothSimulation.cs\par
+using UnityEngine;\par
+using System.Collections;\par
+using System.Collections.Generic;\par
+\par
+#Function: Start\par
+#Parameters: n/a\par
+#Description: assign clothgui to GetComponent of class ClothGUI\par
+#Return: n/a\par
+ void Start()\par
+ \{\par
+   clothgui = GetComponent<ClothGUI>();\par
+ \}\par
+\par
+#Function: FixedUpdate\par
+#Parameters: n/a\par
+#Description: compute forces and integrate motion\par
+#Return: n/a\par
+void FixedUpdate()\par
+\{\par
+    foreach (Particle o in particles)\par
+    \{\par
+       if (o)\par
+       \{\par
+          Vector3 gravityForce = new Vector3(0f,-9.8f,0f)*o.mass;\par
+          o.Force = gravityForce;\par
+       \}\par
+    \}\par
+\par
+    foreach (SpringDamper s in springDampers)\par
+    \{\par
+       if (s)\par
+       \{\par
+          s.SpringConstant = clothgui.SpringConstant.value;\par
+          s.DampingFactor = clothgui.DampingFactor.value;\par
+          s.Restlength = clothgui.RestLength.value;\par
+          s.computeForce();\par
+        \}\par
+     \}\par
+\par
+     foreach (Triangle t in triangles)\par
+     \{\par
+        if (t)\par
+        \{\par
+           t.airVelocity.z = clothgui.AirBlow.value;\par
+           t.computeForce();\par
+        \}\par
+     \{\par
+\par
+     foreach (Particle o in particles)\par
+     \{\par
+        if (o)\par
+        \{ o.EulerIntegration(); \}\par
+     \}\par
+\}\par
+\par
+#Function: DestroyCloth\par
+#Parameters: n/a\par
+#Description: destroy cloth at run time. All the lists assign to a new list. Also, reset InputField\par
+#Return: n/a\par
+ public void DestroyCloth()\par
+ \{\par
+    foreach (Particle p in particles)\par
+    \{\par
+        Destroy(p.gameObject);\par
+    \}\par
+\par
+    foreach (SpringDamper s in springDampers)\par
+    \{\par
+        Destroy(s.gameObject);\par
+    \}\par
+\par
+    foreach (Triangle t in triangles)\par
+    \{\par
+         Destroy(t.gameObject);\par
+    \}\par
+        \par
+    clothgui.Row.text = \ldblquote\rdblquote ;\par
+    clothgui.Column.text = \ldblquote\rdblquote ;\par
+    clothgui.Width.text = \ldblquote\rdblquote ;\par
+    clothgui.Height.text = \ldblquote\rdblquote ;\par
+\par
+    springDampers = new List<SpringDamper>();\par
+    particles = new List<Particle>();\par
+    triangles = new List<Triangle>();\par
+ \}\par
+\par
+#Function: ClothSpawn\par
+#Parameters: n/a\par
+#Description: Instantiate the cloth(Grid) using particle, spring-damper, triangle and SetAnchor function\par
+#Return: n/a\par
+public void ClothSpawn()\par
+\{\par
+\tab Particle particle;\par
+\tab for (int i = 0; i < rows; ++i) \par
+\tab\{\par
+\tab    for (int j = 0; j < cols; ++j) \par
+\tab    \{\par
+\tab\tab particle = Instantiate (ParticlesPreb);\par
+\tab\tab particle.transform.position = new \par
+\tab\tab\tab Vector3(i * width / rows, j * height / cols, 0);\par
+           particle.transform.parent = transform;\par
+           particles.Add (particle);\par
+\tab    \}\par
+\tab\}\par
+\par
+\tab for(int i = 0; i < rows * cols; ++i)\par
+\tab\{\par
+\tab\tab if (i + rows < rows * cols)\par
+\tab\tab\{\par
+\tab\tab\tab SpringDamper RowSpring=Instantiate(SpringsPreb);\par
+                \tab RowSpring.transform.parent = transform;\par
+                \tab RowSpring.SetSpring(particles[i],\par
+\tab\tab\tab\tab particles[i+rows]);\par
+            \tab springDampers.Add(RowSpring);\par
+\par
+\tab\tab\tab if((i % cols) != rows - 1)\par
+\tab\tab\tab\{\par
+\tab\tab\tab      SpringDamper ColSpring = \tab\tab\tab\tab\tab\tab\tab\tab\tab Instantiate(SpringsPreb);\par
+                \tab\tab ColSpring.transform.parent = transform;\tab          \tab\tab\tab\tab ColSpring.SetSpring(particles[i], \tab\tab\tab\tab\tab\tab\tab particles[i + 1]);\par
+                \tab\tab springDampers.Add(ColSpring);\par
+\tab\tab\tab\}\par
+               \par
+               \tab if (i + 1 < rows * cols && i + rows < rows* cols)\par
+\tab\tab\tab\{\par
+\tab\tab\tab      SpringDamper RightDSpring = \tab\tab\tab\tab\tab\tab\tab\tab Instantiate(SpringsPreb);\par
+                    \tab RightDSpring.transform.parent = transform;\par
+                    \tab RightDSpring.SetSpring(particles[i + 1], \tab\tab\tab\tab\tab\tab particles[i + rows]);\par
+                    \tab springDampers.Add(RightDSpring);\par
+                \tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if(i + rows + 1 < rows * cols)\par
+\tab\tab\tab\{\par
+\tab\tab\tab      SpringDamper LeftDSpring = \tab\tab\tab\tab\tab\tab\tab\tab\tab Instantiate(SpringsPreb);\par
+                   \tab LeftDSpring.transform.parent = transform  \tab\tab         \tab\tab LeftDSpring.SetSpring(particles[i], \tab\tab\tab\tab\tab\tab particles[i + rows + 1]);                   \tab\tab         \tab springDampers.Add(LeftDSpring);\par
+                \}\tab\tab\tab\par
+\tab     \tab  \}\par
+        \}\par
+\par
+        for (int i = 0; i < rows * cols; ++i)\par
+        \{\par
+            if (i + 1 < rows * cols && i + rows < rows * cols && \tab\tab\tab\tab i + rows + 1 < rows * cols)\par
+            \{\par
+                Triangle firstTriangle = \tab\tab\tab\tab\tab\tab\tab\tab\tab Instantiate(TrianglePreb);\par
+                firstTriangle.transform.parent = transform;\par
+                firstTriangle.makeTriangle(particles[i], \tab\tab\tab\tab\tab particles[i + 1], particles[i + rows]);\par
+                triangles.Add(firstTriangle);\par
+\par
+                Triangle secondTriangle = \tab\tab\tab\tab\tab\tab\tab\tab\tab Instantiate(TrianglePreb);\par
+                secondTriangle.transform.parent = transform;\par
+                secondTriangle.makeTriangle(particles[i], \tab\tab\tab\tab\tab particles[i + 1], particles[i + rows + 1]);\par
+                triangles.Add(secondTriangle);\par
+\par
+                Triangle thirdTriangle=Instantiate(TrianglePreb);\par
+                thirdTriangle.transform.parent = transform;\par
+                thirdTriangle.makeTriangle(particles[i + 1], \tab\tab\tab\tab particles[i + rows], particles[i + rows +1]);\par
+                triangles.Add(thirdTriangle);\par
+\par
+                Triangle fourTriangle =Instantiate(TrianglePreb);\par
+                fourTriangle.transform.parent = transform;\par
+                fourTriangle.makeTriangle(particles[i], \tab\tab\tab\tab\tab particles[i + rows], particles[i + rows + 1]);\par
+                triangles.Add(fourTriangle);\par
+            \}\par
+        \}\par
+        SetAnchor();\par
+    \}\par
+\par
+\par
+#Function: SetAnchor\par
+#Parameters: n/a\par
+#Description: Set 2 as a pin-point to hold up the cloth(Grid)\par
+#Return: n/a\par
+ void SetAnchor()\par
+ \{\par
+     if (clothgui.anchor2.isOn == true)\par
+     \{\par
+         particles[cols - 1].isAnchor = true;\par
+         particles[rows * cols - 1].isAnchor = true;\par
+     \}\par
+\par
+     if (clothgui.anchor4.isOn == true)\par
+     \{\par
+         particles[0].isAnchor = true;\par
+         particles[cols - 1].isAnchor = true;\par
+         particles[rows * cols - 1].isAnchor = true;\par
+         particles[rows * cols - cols].isAnchor = true;\par
+     \}\par
+ \}\par
+\par
+File: Particle.cs\par
+Using UnityEngine;\par
+Using System.Collections;\par
+\par
+#Function: EulerIntegration \par
+#Parameters: n/a\par
+#Description: integrate particle motion by calculating acceleration with Newton\rquote s second law then add it to the particle Velocity with the time that past by. Update particle position with that Velocity also with the time that past by. This calculation won\rquote t apply to the particle that is anchor\par
+#Return: n/a\par
+public void EulerIntegration()\par
+\{\par
+        if (!isAnchor)\par
+        \{\par
+            Vector3 Acceleration = Force / mass;\par
+            Velocity += Acceleration * Time.deltaTime;\par
+            Position += Velocity * Time.deltaTime;\par
+        \}\par
+\}\par
+\par
+#Function: Start\par
+#Parameter: n/a\par
+#Description: Zero out Velocity, and assign Position to this gameobject current position that this script attach to\par
+#Return: n/a \par
+void Start()\par
+\{\par
+\tab Velocity = new Vector3 (0,0,0);\par
+\tab Position = transform.position;\par
+\}\par
+\par
+File: SpringDamper.cs\par
+Using UnityEngine;\par
+Using System.Collections;\par
+\par
+#Function: SetSpring\par
+#Parameters: Particle _p1, Particle _p2\par
+#Description: _p1 and _p2 are the two particles that this spring connected to. Use _p1 and _p2 to get the information of which particle it is, then assign them to p1 and p2 data members\par
+#Return: n/a\par
+public void SetSpring(Particle _p1, Particle _p2)\par
+\{\par
+        p1 = _p1;\par
+        p2 = _p2;\par
+\}\par
+\par
+#Function: computeForce\par
+#Parameters: n/a\par
+#Description: Calculate spring force from the two particles that this spring connected to, then apply that force to the particles force\par
+#Return: n/a\par
+public void computeForce()\par
+\{\par
+\tab float particlesDistance = \tab Vector3.Distance(p1.Position ,p2.Position);\par
+\tab Vector3 particlesDiff = p2.Position - p1.Position;\par
+\tab Vector3 normalizeParticlesDiff = particlesDiff.normalized;\par
+\tab\tab\par
+\tab float springForce = - SpringConstant * (Restlength - \tab particlesDistance);\par
+\par
+\tab float particle1Vel = Vector3.Dot (normalizeParticlesDiff, \tab p1.Velocity); \par
+\tab float particle2Vel = Vector3.Dot (normalizeParticlesDiff, \tab p2.Velocity);\par
+\par
+\tab float dampForce = - DampingFactor * (particle1Vel - \tab particle2Vel);\par
+\par
+\tab float springDamper = springForce + dampForce;\par
+\par
+\tab Vector3 force1 = springDamper * normalizeParticlesDiff;\par
+\tab Vector3 force2 = -force1;\par
+\par
+\tab p1.Force += force1;\par
+\tab p2.Force += force2;\par
+\}\par
+\par
+#Function: Update\par
+#Parameters: n/a\par
+#Description: update spring as the particle position change\par
+#Return: n/a\par
+void Update()\par
+\{\par
+
+\pard\li720 LineRenderer spring = GetComponent<LineRenderer>();\par
+spring.SetPosition(0, p1.Position);\par
+spring.SetPosition(1, p2.Position);\par
+
+\pard\}\par
+\par
+File: Triangle.cs\par
+using UnityEngine;\par
+using System.Collections;\par
+\par
+#Function: Start\par
+#Parameters: n/a\par
+#Description: zero out airVelocity, assign airDensity to 1, and dragCoefficient to 0.5\par
+#Return: n/a\par
+void Start()\par
+\{\par
+     airVelocity = new Vector3(0, 0, 0);\par
+     airDensity = 1f;\par
+     dragCoefficient = 1f;\par
+\}\par
+\par
+#Function: makeTriangle\par
+#Parameters: Particle _p1, Particle _p2, Particle _p3\par
+#Description: _p1, _p2, and _p3 are the three particles that going to form the triangle. Takes in three particles to get the information of which particle belong to this triangle \par
+#Return:n/a\par
+public void makeTriangle(Particle _p1, Particle _p2,Particle _p3)\par
+\{\par
+     p1 = _p1;\par
+     p2 = _p2;\par
+     p3 = _p3;\par
+\}\par
+\par
+#Function: computeForce\par
+#Parameters: n/a\par
+#Description: computing aerodynamic force for the triangle, then apply for each particle force of the triangle\par
+#Return: n/a\par
+\par
+File: Exit.cs\par
+using UnityEngine;\par
+using System.Collections;\par
+\par
+#Function: exitApplication\par
+#Parameters: n/a\par
+#Description: quit the application\par
+#Return: n/a\par
+public void exitApplication()\par
+\{\par
+     Application.Quit();\par
+\}\par
+\par
+\par
+File: ClothGUI.cs\par
+using UnityEngine;\par
+using UnityEngine.UI;\par
+using System.Collections;\par
+\par
+#Function: Start\par
+#Parameters: n/a\par
+#Description: set all the GUI elements position depend on the screen width and height\par
+#Return: n/a\par
+void Start ()\par
+\{\par
+      DestroyCloth.GetComponent<RectTransform>().position = new \tab\tab  Vector3(Screen.width *0.85f, Screen.height * 0.9f, 0);\par
+      CreateCloth.GetComponent<RectTransform>().position = new \tab\tab  Vector3(Screen.width * 0.5f, Screen.height * 0.54f, 0);\par
+      Exit.GetComponent<RectTransform>().position = new \tab\tab\tab  Vector3(Screen.width * 0.5f,Screen.height * 0.44f, 0);\par
+      RestLength.GetComponent<RectTransform>().position = new \tab\tab  Vector3(Screen.width * 0.15f, Screen.height * 0.9f, 0);\par
+      DampingFactor.GetComponent<RectTransform>().position = new \tab   \tab  Vector3(Screen.width  * 0.15f, Screen.height * 0.8f, 0);\par
+      SpringConstant.GetComponent<RectTransform>().position = new \tab  Vector3(Screen.width * 0.15f, Screen.height * 0.7f, 0);\par
+      AirBlow.GetComponent<RectTransform>().position = new \tab  \tab  \tab  Vector3(Screen.width * 0.15f, Screen.height * 0.6f, 0);\par
+\par
+       Row.GetComponent<RectTransform>().position = new \tab  \tab  \tab   Vector3(Screen.width * 0.3f, Screen.height * 0.8f, 0);\par
+       Column.GetComponent<RectTransform>().position = new \tab\tab  \tab   Vector3(Screen.width * 0.42f, Screen.height * 0.8f, 0);\par
+       Width.GetComponent<RectTransform>().position = new \tab  \tab  \tab   Vector3(Screen.width * 0.58f, Screen.height * 0.8f, 0);\par
+       Height.GetComponent<RectTransform>().position = new \tab  \tab  \tab   Vector3(Screen.width * 0.7f, Screen.height * 0.8f, 0);\par
+\par
+        CreateCloth.gameObject.SetActive(true);\par
+        Exit.gameObject.SetActive(true);\par
+\}\par
+\par
+#Function: moveExitToTheConner\par
+#Parameters: n/a\par
+#Description: set the Exit button position to the bottom right if the screen\par
+#Return: n/a\par
+public void moveExitToTheConner()\par
+\{\par
+        Exit.GetComponent<RectTransform>().position = new \tab Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);\par
+\}\par
+\par
+\par
+#Function: moveExitBack\par
+#Parameters: n/a\par
+#Description: move the Exit button position back to it origin position\par
+#Return: n/a\par
+public void moveExitBack()\par
+\{\par
+        Exit.GetComponent<RectTransform>().position = new \tab Vector3(Screen.width * 0.5f, Screen.height * 0.44f, 0);\par
+\}\par
+\par
+#Function: Update\par
+#Parameters: n/a\par
+#Description: Checking if the user input on the InputField. If user did, Create Cloth button is able to click . If user didn\rquote t, Create Cloth button is disable\par
+#Return: n/a\par
+void Update()\par
+\{\par
+        if (Row.text != "" && Column.text != "" &&     \tab\tab\tab              Width.text != "" && Height.text != "")\par
+        \{\par
+            CreateCloth.interactable = true;\par
+        \}\par
+        else\par
+            CreateCloth.interactable = false;\par
+\}\par
+}
+ 

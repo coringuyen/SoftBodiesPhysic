@@ -52,19 +52,19 @@ File: ClothSimulation.cs
 Class: ClothSimulation
 Data members:
 	Name: ParticlesPreb
-	Description: the gameobject that will use to instantiate particle
-Name: SpringsPreb
-	Description: the gameobject that will use to instantiate spring-damper
+	Description: the gameobject that will use to instantiate 	particle
+	Name: SpringsPreb
+	Description: the gameobject that will use to instantiate 	spring-damper
 	Name: TrianglePreb
-	Description: the gameobject that will use to instantiate triangle
+	Description: the gameobject that will use to instantiate 	triangle
 	Name: rows
 	Description: number of rows the particle will spawn in 
 	Name: cols
 	Description: number of column the particle will spawn in
 	Name: width
-	Description: Entire width of cloth. Also, give the space between particles on row
+	Description: Entire width of cloth. Also, give the space	 	between particles on row
 	Name: height
-	Description: Entire height of cloth. This also give the space between particles on column
+	Description: Entire height of cloth. This also give the 	space between particles on column
 	Name: clothgui
 	Description: to access ClothGUI class data members
 	Name: particles
@@ -103,11 +103,11 @@ File: Particle.cs
 Class: Particle
 Data members
 	Name: Position
-	Description: use to get, and update particle world space position
+	Description: use to get, and update particle world space 	position
 	Name: Velocity
 	Description: particle speed with direction
 	Name: Force
-	Description: using this force to calculate Acceleration from Newton’s Second Law
+	Description: using this force to calculate Acceleration from 	Newton’s Second Law
 	Name: mass
 	Description: weight of the particle
 	Name: isAnchor
@@ -127,11 +127,11 @@ File: SpringDamper.cs
 Class: SpringDamper
 Data members
 	Name: SpringConstant
-	Description: the coefficient to control the stiffness of the spring
+	Description: the coefficient to control the stiffness of the 	spring
 	Name: DampingFactor
-	Description: the coefficient to restrict the spring velocity so it won’t go crazy
+	Description: the coefficient to restrict the spring velocity 	so it won’t go crazy
 	Name: RestLength
-Description: the coefficient for spring length that need to be maintain
+	Description: the coefficient for spring length that need to 	be maintain
 	Name: p1
 	Description: the first particle that this spring connect to
 	Name: p2
@@ -198,17 +198,17 @@ Class: ClothGUI
 Data members
 	Name: SpringConstant
 	Description: user can change the stiffness of the spring
-Name: DampingFactor
-	Description: user can change the velocity restriction of the spring
+	Name: DampingFactor
+	Description: user can change the velocity restriction of the 	spring
 	Name: RestLength
-	Description:  user can change the length of the spring that need to be maintain
+	Description:  user can change the length of the spring that 	need to be maintain
 	Name: AirBlow
 	Description: user can put some air on the z axis
 	Name: Exit
-	Description: when this button press the application will quit
-Name: createCloth
-Description: spawn the cloth(Grid). Set all the sliders to active, and put the exit button to   bottom right corner
-Name: DestroyCloth
+	Description: when this button press the application will 	quit
+	Name: createCloth
+	Description: spawn the cloth(Grid). Set all the sliders to 	active, and put the exit button to   bottom right corner
+	Name: DestroyCloth
 	Description: destroy the cloth(Grid)
 	Name: Row
 	Description: to get the user input for rows
@@ -250,76 +250,81 @@ using System.Collections.Generic;
 #Return: n/a
  void Start()
  {
-       clothgui = GetComponent<ClothGUI>();
-  }
+   clothgui = GetComponent<ClothGUI>();
+ }
 
 #Function: FixedUpdate
 #Parameters: n/a
 #Description: compute forces and integrate motion
 #Return: n/a
 void FixedUpdate()
-  {
-       foreach (Particle o in particles)
+{
+    foreach (Particle o in particles)
+    {
+       if (o)
        {
-           if (o)
-           {
-               Vector3 gravityForce = new Vector3(0f, -9.8f, 0f) * o.mass;
-               o.Force = gravityForce;
-           }
+          Vector3 gravityForce = new Vector3(0f,-9.8f,0f)*o.mass;
+          o.Force = gravityForce;
        }
-       foreach (SpringDamper s in springDampers)
+    }
+
+    foreach (SpringDamper s in springDampers)
+    {
+       if (s)
        {
-           if (s)
-           {
-               s.SpringConstant = clothgui.SpringConstant.value;
-               s.DampingFactor = clothgui.DampingFactor.value;
-               s.Restlength = clothgui.RestLength.value;
-               s.computeForce();
-           }
-       }
-       foreach (Triangle t in triangles)
-       {
-           if (t)
-           {
-               t.airVelocity.z = clothgui.AirBlow.value;
-               t.computeForce();
-           }
-       {
-       foreach (Particle o in particles)
-       {
-           if (o)
-           { o.EulerIntegration(); }
-       }
-   }
+          s.SpringConstant = clothgui.SpringConstant.value;
+          s.DampingFactor = clothgui.DampingFactor.value;
+          s.Restlength = clothgui.RestLength.value;
+          s.computeForce();
+        }
+     }
+
+     foreach (Triangle t in triangles)
+     {
+        if (t)
+        {
+           t.airVelocity.z = clothgui.AirBlow.value;
+           t.computeForce();
+        }
+     {
+
+     foreach (Particle o in particles)
+     {
+        if (o)
+        { o.EulerIntegration(); }
+     }
+}
 
 #Function: DestroyCloth
 #Parameters: n/a
 #Description: destroy cloth at run time. All the lists assign to a new list. Also, reset InputField
 #Return: n/a
  public void DestroyCloth()
+ {
+    foreach (Particle p in particles)
     {
-        foreach (Particle p in particles)
-        {
-            Destroy(p.gameObject);
-        }
-        foreach (SpringDamper s in springDampers)
-        {
-            Destroy(s.gameObject);
-        }
-        foreach (Triangle t in triangles)
-        {
-            Destroy(t.gameObject);
-        }
-        
-        clothgui.Row.text = “”;
-        clothgui.Column.text = “”;
-        clothgui.Width.text = “”;
-        clothgui.Height.text = “”;
-
-        springDampers = new List<SpringDamper>();
-        particles = new List<Particle>();
-        triangles = new List<Triangle>();
+        Destroy(p.gameObject);
     }
+
+    foreach (SpringDamper s in springDampers)
+    {
+        Destroy(s.gameObject);
+    }
+
+    foreach (Triangle t in triangles)
+    {
+         Destroy(t.gameObject);
+    }
+        
+    clothgui.Row.text = “”;
+    clothgui.Column.text = “”;
+    clothgui.Width.text = “”;
+    clothgui.Height.text = “”;
+
+    springDampers = new List<SpringDamper>();
+    particles = new List<Particle>();
+    triangles = new List<Triangle>();
+ }
 
 #Function: ClothSpawn
 #Parameters: n/a
@@ -330,22 +335,23 @@ public void ClothSpawn()
 	Particle particle;
 	for (int i = 0; i < rows; ++i) 
 	{
-	        for (int j = 0; j < cols; ++j) 
-	        {
+	   for (int j = 0; j < cols; ++j) 
+	   {
 		particle = Instantiate (ParticlesPreb);
-		particle.transform.position = new Vector3 (i * width / rows, j * height / cols, 0);
-                	particle.transform.parent = transform;
-                	particles.Add (particle);
-	          }
-	  }
+		particle.transform.position = new 
+			Vector3(i * width / rows, j * height / cols, 0);
+           particle.transform.parent = transform;
+           particles.Add (particle);
+	   }
+	}
+
 	for(int i = 0; i < rows * cols; ++i)
 	{
 		if (i + rows < rows * cols)
 		{
-			SpringDamper RowSpring = Instantiate(SpringsPreb);
-                		RowSpring.transform.parent = transform;
-            RowSpring.SetSpring(particles[i], particles[i + rows]);
-            springDampers.Add(RowSpring);
+			SpringDamper RowSpring=Instantiate(SpringsPreb);
+                	RowSpring.transform.parent = transform;       	  		  RowSpring.SetSpring(particles[i],particles[i+rows]);
+            	springDampers.Add(RowSpring);
 
 			if((i % cols) != rows - 1)
 			{
@@ -407,10 +413,21 @@ public void ClothSpawn()
 #Description: Set 2 as a pin-point to hold up the cloth(Grid)
 #Return: n/a
  void SetAnchor()
-    {
-        particles[0].isAnchor = true;
-        particles[rows * cols - cols].isAnchor = true;
-    }
+ {
+     if (clothgui.anchor2.isOn == true)
+     {
+         particles[cols - 1].isAnchor = true;
+         particles[rows * cols - 1].isAnchor = true;
+     }
+
+     if (clothgui.anchor4.isOn == true)
+     {
+         particles[0].isAnchor = true;
+         particles[cols - 1].isAnchor = true;
+         particles[rows * cols - 1].isAnchor = true;
+         particles[rows * cols - cols].isAnchor = true;
+     }
+ }
 
 File: Particle.cs
 Using UnityEngine;
@@ -460,16 +477,16 @@ public void SetSpring(Particle _p1, Particle _p2)
 #Return: n/a
 public void computeForce()
 {
-	float particlesDistance = Vector3.Distance(p1.Position ,p2.Position);
+	float particlesDistance = 	Vector3.Distance(p1.Position ,p2.Position);
 	Vector3 particlesDiff = p2.Position - p1.Position;
 	Vector3 normalizeParticlesDiff = particlesDiff.normalized;
 		
-	float springForce = - SpringConstant * (Restlength - particlesDistance);
+	float springForce = - SpringConstant * (Restlength - 	particlesDistance);
 
-	float particle1Vel = Vector3.Dot (normalizeParticlesDiff, p1.Velocity); 
-	float particle2Vel = Vector3.Dot (normalizeParticlesDiff, p2.Velocity);
+	float particle1Vel = Vector3.Dot (normalizeParticlesDiff, 	p1.Velocity); 
+	float particle2Vel = Vector3.Dot (normalizeParticlesDiff, 	p2.Velocity);
 
-	float dampForce = - DampingFactor * (particle1Vel - particle2Vel);
+	float dampForce = - DampingFactor * (particle1Vel - 	particle2Vel);
 
 	float springDamper = springForce + dampForce;
 
@@ -501,20 +518,20 @@ using System.Collections;
 #Return: n/a
 void Start()
 {
-        airVelocity = new Vector3(0, 0, 0);
-        airDensity = 1f;
-        dragCoefficient = 1f;
+     airVelocity = new Vector3(0, 0, 0);
+     airDensity = 1f;
+     dragCoefficient = 1f;
 }
 
 #Function: makeTriangle
 #Parameters: Particle _p1, Particle _p2, Particle _p3
 #Description: _p1, _p2, and _p3 are the three particles that going to form the triangle. Takes in three particles to get the information of which particle belong to this triangle 
 #Return:n/a
-public void makeTriangle(Particle _p1, Particle _p2, Particle _p3)
+public void makeTriangle(Particle _p1, Particle _p2,Particle _p3)
 {
-        p1 = _p1;
-        p2 = _p2;
-        p3 = _p3;
+     p1 = _p1;
+     p2 = _p2;
+     p3 = _p3;
 }
 
 #Function: computeForce
@@ -532,7 +549,7 @@ using System.Collections;
 #Return: n/a
 public void exitApplication()
 {
-        Application.Quit();
+     Application.Quit();
 }
 
 

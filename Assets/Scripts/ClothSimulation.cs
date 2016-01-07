@@ -17,6 +17,7 @@ public class ClothSimulation : MonoBehaviour
 	private int width, height; // width and height of the Grid entirely 
 
     ClothGUI clothgui;
+    public float midParticleY;
 
     void Start()
     {
@@ -88,9 +89,10 @@ public class ClothSimulation : MonoBehaviour
                 particles.Add (particle);
 			}
 		}
-		
-		// Spawn Spring
-		for(int i = 0; i < rows * cols; ++i)
+
+        midParticleY = particles[rows * cols / 2].Position.y;
+        // Spawn Spring
+        for (int i = 0; i < rows * cols; ++i)
 		{
 			// Spring for the row
 			if (i + rows < rows * cols)

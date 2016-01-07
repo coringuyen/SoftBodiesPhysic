@@ -12,15 +12,30 @@ public class CameraMovement: MonoBehaviour
 	Vector3 originRot;			// Initial rotation of the camera 
 	Vector3 originScl;			// Initial scale of the camera 
 
+    public GameObject clothsimulation;
+    ClothSimulation midparticle;
+
     void Awake()
- 	{ 
- 		// Saves the initial transform values for later resetting 
- 		originPos = transform.position; 
- 		originRot = transform.localEulerAngles; 
- 		originScl = transform.localScale; 
- 	} 
+ 	{
+        midparticle = clothsimulation.GetComponent<ClothSimulation>();
+        // Saves the initial transform values for later resetting 
+        originPos = transform.position;
+        originRot = transform.localEulerAngles;
+        originScl = transform.localScale;
+    } 
  
- 
+    public void setCameraPosition()
+    {
+        transform.position = new Vector3(transform.position.x, midparticle.midParticleY, transform.position.z);
+    }
+     
+    public void resetCamera()
+    {
+        transform.position = originPos;                  
+        transform.localEulerAngles = originRot;          
+        transform.localScale = originScl;
+    }
+
  	void Update()
  	{ 
  		float Th = 0;	// Horizontal transform value 
@@ -53,14 +68,6 @@ public class CameraMovement: MonoBehaviour
  		transform.RotateAround(transform.position, transform.right, -Rx);	// Rotates the camera to look up 
  		transform.RotateAround(transform.position, Vector3.up, Ry);			// Rotates the camera to look down 
  
- 
- 		/// Will reset the camera ti its initial position	// 
- 		if(Input.GetKey(resetKey))							// 
- 		{													// 
- 			transform.position = originPos;					// 
-			transform.localEulerAngles = originRot;			// 
- 			transform.localScale = originScl;				// 
- 		} 
  	} 
 
 }

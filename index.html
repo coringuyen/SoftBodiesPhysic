@@ -131,250 +131,250 @@ try {
 		
         <h1>
 <a id="problem-description" class="anchor" href="#problem-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<strong>Problem Description</strong>
+<center><strong>Problem Description</strong></center>
 </h1>
 
-<p><strong>Name</strong>: Cloth Simulation</p>
-<p><strong>Problem Statement</strong>: Implement cloth simulation using particle, spring-damper, and triangle. Under two step of physic simulation is compute forces, and integrate motion.</p>
-<p><strong>Problem Specification</strong>:<br/>
+<p style="font-size:18px"><strong>Name</strong>: Cloth Simulation</p>
+<p style="font-size:18px"><strong>Problem Statement</strong>: Implement cloth simulation using particle, spring-damper, and triangle. Under two step of physic simulation is compute forces, and integrate motion.</p>
+<p style="font-size:18px"><strong>Problem Specification</strong>:<br/>
     <span style="padding-left:68px;">Compute Force:</span><br/> 
 		<span style="padding-left:136px;">For each particle apply Gravity force.</span><br/>
-		<span style="padding-left:136px;">For each spring-damper compute spring force then apply the force to the two <span style="padding-left:136px;">particles that this spring-damper connected to.</span><br/>
-		<span style="padding-left:136px;">For each triangle compute aerodynamic force then apply the force to the 3 <span style="padding-left:136px;">particles that form the triangle.</span><br/>
+		<span style="padding-left:136px;">For each spring-damper compute spring force then apply the <span style="padding-left:136px;">force to the two particles that this spring-damper connected to.</span><br/>
+		<span style="padding-left:136px;">For each triangle compute aerodynamic force then apply the <span style="padding-left:136px;">force to the 3 particles that form the triangle.</span><br/>
     <span style="padding-left:68px;">Integrate Motion: For each particle apply Euler Integration.</span><br/></p>
 
 <h1>
-<a id="user-interface-information" class="anchor" href="#user-interface-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>User Interface Information</strong>
-</h1>
+<a id="user-interface-information" class="anchor" href="#user-interface-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><strong>User Interface Information</strong>
+</h1></center>
 
-<p>Name: SpringConstant<br/>
+<p style="font-size:18px">Name: SpringConstant<br/>
 Description: stiffness of the spring</p>
 
-<p>Name: DampingFactor<br/>
+<p style="font-size:18px">Name: DampingFactor<br/>
 Description: spring velocity restriction</p>
 
-<p>Name: RestLength<br/>
+<p style="font-size:18px">Name: RestLength<br/>
 Description: spring length that need to maintain</p>
 
-<p>Name: Air Blow (Z)<br/>
+<p style="font-size:18px">Name: Air Blow (Z)<br/>
 Description: the direction of air will blow on z axis</p>
 
-<p>Name: Create Cloth<br/>
+<p style="font-size:18px">Name: Create Cloth<br/>
 Description: Instantiate the Grid</p>
 
-<p>Name: Exit<br/>
+<p style="font-size:18px">Name: Exit<br/>
 Description: quit the application</p>
 
-<p>Name: Destroy<br/>
+<p style="font-size:18px">Name: Destroy<br/>
 Description: destroy the cloth(Grid)</p>
 
-<p>Name: Row<br/>
+<p style="font-size:18px">Name: Row<br/>
 Description: number of row for particle</p>
 
-<p>Name: Column<br/>
+<p style="font-size:18px">Name: Column<br/>
 Description: number of column for particle</p>
 
-<p>Name: Width<br/>
+<p style="font-size:18px">Name: Width<br/>
 Description: the width of the cloth. How long the cloth would be</p>
 
-<p>Name: Height<br/>
+<p style="font-size:18px">Name: Height<br/>
 Description: the height of the cloth. How tall the cloth would be</p>
 
 <h1>
-<a id="functions-information" class="anchor" href="#functions-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Functions Information</strong>
+<a id="functions-information" class="anchor" href="#functions-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><strong>Functions Information</strong></center>
 </h1>
 
-<p><strong>File</strong>: ClothSimulation.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: ClothSimulation.cs<br/>
 Class: ClothSimulation<br/>
 Data members:<br/>
     <span style="padding-left:68px;">Name: ParticlesPreb</span><br/>
     <span style="padding-left:68px;">Description: the gameobject that will use to instantiate particle</span></p>
-	<p><span style="padding-left:68px;">Name: SpringsPreb</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: SpringsPreb</span><br/>
     <span style="padding-left:68px;">Description: the gameobject that will use to instantiate spring-damper</span></p>
-    <p><span style="padding-left:68px;">Name: TrianglePreb</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: TrianglePreb</span><br/>
     <span style="padding-left:68px;">Description: the gameobject that will use to instantiate triangle</span></p>
-    <p><span style="padding-left:68px;">Name: rows</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: rows</span><br/>
     <span style="padding-left:68px;">Description: number of rows the particle will spawn in</span> </p>
-    <p><span style="padding-left:68px;">Name: cols</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: cols</span><br/>
     <span style="padding-left:68px;">Description: number of column the particle will spawn in</span></p>
-    <p><span style="padding-left:68px;">Name: width</span><br/>
-    <span style="padding-left:68px;">Description: Entire width of cloth. Also, give the space between particles on row</span></p>
-    <p><span style="padding-left:68px;">Name: height</span><br/>
-    <span style="padding-left:68px;">Description: Entire height of cloth. This also give the space between particles on column</span></p>
-    <p><span style="padding-left:68px;">Name: clothgui</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: width</span><br/>
+    <span style="padding-left:68px;">Description: Entire width of cloth. Also, give the space between particles <span style="padding-left:68px;">on row</span></p>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: height</span><br/>
+    <span style="padding-left:68px;">Description: Entire height of cloth. This also give the space between <span style="padding-left:68px;">particles on column</span></p>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: clothgui</span><br/>
     <span style="padding-left:68px;">Description: to access ClothGUI class data members</span></p>
-    <p><span style="padding-left:68px;">Name: particles</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: particles</span><br/>
     <span style="padding-left:68px;">Description: a list to store particle</span></p>
-    <p><span style="padding-left:68px;">Name: springDampers</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: springDampers</span><br/>
     <span style="padding-left:68px;">Description: a list to store spring-damper</span></p>
-    <p><span style="padding-left:68px;">Name: triangles</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: triangles</span><br/>
     <span style="padding-left:68px;">Description: a list to store triangle</span></p>
 
-<p>Function: SetAnchor<br/>
+<p style="font-size:18px">Function: SetAnchor<br/>
 Parameters: n/a<br/>
 Description: Set 2 as a pin-point to hold up the cloth(Grid)<br/>
 Return: n/a</p>
 
-<p>Function: ClothSpawn<br/>
+<p style="font-size:18px">Function: ClothSpawn<br/>
 Parameters: n/a<br/>
 Description: Instantiate the cloth(Grid) using particle, spring-damper, triangle and SetAnchor function<br/>
 Return: n/a</p>
 
-<p>Function: FixedUpdate<br/>
+<p style="font-size:18px">Function: FixedUpdate<br/>
 Parameters: n/a<br/>
 Description: compute forces and integrate motion<br/>
 Return: n/a</p>
 
-<p>Function: Start<br/>
+<p style="font-size:18px">Function: Start<br/>
 Parameters: n/a<br/>
 Description: assign clothgui to GetComponent of class ClothGUI<br/>
 Return: n/a</p>
 
-<p>Function: DestroyCloth<br/>
+<p style="font-size:18px">Function: DestroyCloth<br/>
 Parameters: n/a<br/>
 Description: destroy cloth at run time. All the lists assign to a new list. Also, reset InputField<br/>
 Return: n/a</p>
 
-<p><strong>File</strong>: Particle.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: Particle.cs<br/>
 Class: Particle<br/>
 Data members<br/>
     <span style="padding-left:68px;">Name: Position</span><br/>
     <span style="padding-left:68px;">Description: use to get, and update particle world space position</span></p>
-    <p><span style="padding-left:68px;">Name: Velocity</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: Velocity</span><br/>
     <span style="padding-left:68px;">Description: particle speed with direction</span></p>
-    <p><span style="padding-left:68px;">Name: Force</span><br/>
-    <span style="padding-left:68px;">Description: using this force to calculate Acceleration from Newton’s Second Law</span></p>
-    <p><span style="padding-left:68px;">Name: mass</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: Force</span><br/>
+    <span style="padding-left:68px;">Description: using this force to calculate Acceleration from Newton’s <span style="padding-left:68px;">Second Law</span></p>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: mass</span><br/>
     <span style="padding-left:68px;">Description: weight of the particle</span></p>
-    <p><span style="padding-left:68px;">Name: isAnchor</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: isAnchor</span><br/>
     <span style="padding-left:68px;">Description: if the particle is anchor, no calculation on it</span></p>
 
-<p>Function: EulerIntegration <br/>
+<p style="font-size:18px">Function: EulerIntegration <br/>
 Parameters: n/a<br/>
 Description: integrate particle motion by calculating acceleration with Newton’s second law then add it to the particle Velocity with the time that past by. Update particle position with that Velocity also with the time that past by. This calculation won’t apply to the particle that is anchor<br/>
 Return: n/a</p>
 
-<p>Function: Start<br/>
+<p style="font-size:18px">Function: Start<br/>
 Parameter: n/a<br/>
 Description: Zero out Velocity, and assign Position to this gameobject current position that this script attach to<br/>
 Return: n/a </p>
 
-<p><strong>File</strong>: SpringDamper.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: SpringDamper.cs<br/>
 Class: SpringDamper<br/>
 Data members<br/>
     <span style="padding-left:68px;">Name: SpringConstant</span><br/>
     <span style="padding-left:68px;">Description: the coefficient to control the stiffness of the spring</span></p>
-    <p><span style="padding-left:68px;">Name: DampingFactor</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: DampingFactor</span><br/>
     <span style="padding-left:68px;">Description: the coefficient to restrict the spring velocity so it won’t go crazy</span></p>
-    <p><span style="padding-left:68px;">Name: RestLength</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: RestLength</span><br/>
 	<span style="padding-left:68px;">Description: the coefficient for spring length that need to be maintain</span></p>
-    <p><span style="padding-left:68px;">Name: p1</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: p1</span><br/>
     <span style="padding-left:68px;">Description: the first particle that this spring connect to</span></p>
-    <p><span style="padding-left:68px;">Name: p2</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: p2</span><br/>
     <span style="padding-left:68px;">Description: the second particle that this spring connect to</span></p>
 
-<p>Function: SetSpring<br/>
+<p style="font-size:18px">Function: SetSpring<br/>
 Parameters: Particle _p1, Particle _p2<br/>
 Description: _p1 and _p2 are the two particles that this spring connected to. Use _p1 and _p2 to get the information of which particle it is, then assign them to p1 and p2 data members<br/>
 Return: n/a</p>
 
-<p>Function: computeForce<br/>
+<p style="font-size:18px">Function: computeForce<br/>
 Parameters: n/a<br/>
 Description: Calculate spring force from the two particles that this spring connected to, then apply that force to the particles force<br/>
 Return: n/a</p>
 
-<p>Function: Update<br/>
+<p style="font-size:18px">Function: Update<br/>
 Parameters: n/a<br/>
 Description: update spring as the particle position change<br/>
 Return: n/a</p>
 
-<p><strong>File</strong>: Triangle.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: Triangle.cs<br/>
 Class: Triangle<br/>
 Data members<br/>
 	<span style="padding-left:68px;">Name: p1</span><br/>
 	<span style="padding-left:68px;">Description: the first particle to form the triangle</span></p>
-	<p><span style="padding-left:68px;">Name: p2</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: p2</span><br/>
 	<span style="padding-left:68px;">Description: the second particle to form the triangle</span></p>
-	<p><span style="padding-left:68px;">Name: p3</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: p3</span><br/>
 	<span style="padding-left:68px;">Description: the third particle to form the triangle</span></p>
-	<p><span style="padding-left:68px;">Name: airVelocity</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: airVelocity</span><br/>
 	<span style="padding-left:68px;">Description: air direction</span></p>
-	<p><span style="padding-left:68px;">Name: airDensity</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: airDensity</span><br/>
 	<span style="padding-left:68px;">Description: how strong the air will blow</span></p>
-	<p><span style="padding-left:68px;">Name: dragCoefficient</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: dragCoefficient</span><br/>
 	<span style="padding-left:68px;">Description: how much the object will resist from the air</span></p>
 
-<p>Function: Start<br/>
+<p style="font-size:18px">Function: Start<br/>
 Parameters: n/a<br/>
 Description: zero out airVelocity, assign airDensity to 1, and dragCoefficient to 0.5<br/>
 Return: n/a</p>
 
-<p>Function: makeTriangle<br/>
+<p style="font-size:18px">Function: makeTriangle<br/>
 Parameters: Particle _p1, Particle _p2, Particle _p3<br/>
 Description: _p1, _p2, and _p3 are the three particles that going to form the triangle. Takes in three particles to get the information of which particle belong to this triangle <br/>
 Return:n/a</p>
 
-<p>Function: computeForce<br/>
+<p style="font-size:18px">Function: computeForce<br/>
 Parameters: n/a<br/>
 Description: computing aerodynamic force for the triangle, then apply for each particle force of the triangle<br/>
 Return: n/a</p>
 
-<p><strong>File</strong>: Exit.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: Exit.cs<br/>
 Class: Exit<br/>
 Data members<br/>
     n/a</p>
 
-<p>Function: exitApplication<br/>
+<p style="font-size:18px">Function: exitApplication<br/>
 Parameters: n/a<br/>
 Description: quit the application<br/>
 Return: n/a</p>
 
-<p><strong>File</strong>: ClothGUI.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: ClothGUI.cs<br/>
 Class: ClothGUI<br/>
 Data members<br/>
     <span style="padding-left:68px;">Name: SpringConstant</span><br/>
     <span style="padding-left:68px;">Description: user can change the stiffness of the spring</span></p>
-   <p><span style="padding-left:68px;">Name: DampingFactor</span><br/>
+   <p style="font-size:18px"><span style="padding-left:68px;">Name: DampingFactor</span><br/>
     <span style="padding-left:68px;">Description: user can change the velocity restriction of the spring </span></p>
-	<p><span style="padding-left:68px;">Name: RestLength</span><br/>
-    <span style="padding-left:68px;">Description:  user can change the length of the spring that need to be maintain</span></p>
-	<p><span style="padding-left:68px;">Name: AirBlow</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: RestLength</span><br/>
+    <span style="padding-left:68px;">Description:  user can change the length of the spring that need to be <span style="padding-left:68px;">maintain</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: AirBlow</span><br/>
     <span style="padding-left:68px;">Description: user can put some air on the z axis</span></p>
-	<p><span style="padding-left:68px;">Name: Exit</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: Exit</span><br/>
     <span style="padding-left:68px;">Description: when this button press the application will quit</span></p>
-	<p><span style="padding-left:68px;">Name: createCloth</span><br/>
-	<span style="padding-left:68px;">Description: spawn the cloth(Grid). Set all the sliders to active, and put the exit <span style="padding-left:68px;">button to bottom right corner</span></p>
-	<p><span style="padding-left:68px;">Name: DestroyCloth</span><br/>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: createCloth</span><br/>
+	<span style="padding-left:68px;">Description: spawn the cloth(Grid). Set all the sliders to active, and put <span style="padding-left:68px;">the exit button to bottom right corner</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: DestroyCloth</span><br/>
     <span style="padding-left:68px;">Description: destroy the cloth(Grid)</span></p>
-    <p><span style="padding-left:68px;">Name: Row</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: Row</span><br/>
     <span style="padding-left:68px;">Description: to get the user input for rows</span></p>
-    <p><span style="padding-left:68px;">Name: Column</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: Column</span><br/>
     <span style="padding-left:68px;">Description: to get the user input for cols</span></p>
-    <p><span style="padding-left:68px;">Name: Width</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: Width</span><br/>
     <span style="padding-left:68px;">Description: to get the user input for width</span></p>
-    <p><span style="padding-left:68px;">Name: Height</span><br/>
+    <p style="font-size:18px"><span style="padding-left:68px;">Name: Height</span><br/>
     <span style="padding-left:68px;">Description: to get the user input for height</span></p>
 	
-<p>Function: Start<br/>
+<p style="font-size:18px">Function: Start<br/>
 Parameters: n/a<br/>
 Description: set all the GUI elements position depend on the screen width and height<br/>
 Return: n/a</p>
 
-<p>Function: Update<br/>
+<p style="font-size:18px">Function: Update<br/>
 Parameters: n/a<br/>
 Description: Checking if the user input on the InputField. If user did, Create Cloth button is able to click . If user didn’t, Create Cloth button is disable<br/>
 Return: n/a</p>
 
 <h1>
-<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Implementation</strong>
+<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><strong>Implementation</strong></center>
 </h1>
 
-<p><strong>File</strong>: ClothSimulation.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: ClothSimulation.cs<br/>
 using UnityEngine;<br/>
 using System.Collections;<br/>
 using System.Collections.Generic;</p>
 
-<p>#Function: Start<br/>
+<p style="font-size:18px">#Function: Start<br/>
 #Parameters: n/a<br/>
 #Description: assign clothgui to GetComponent of class ClothGUI<br/>
 #Return: n/a</p>
@@ -383,7 +383,7 @@ using System.Collections.Generic;</p>
     clothgui = GetComponent();
 }</code></pre>
 
-<p>#Function: FixedUpdate<br/>
+<p style="font-size:18px">#Function: FixedUpdate<br/>
 #Parameters: n/a<br/>
 #Description: compute forces and integrate motion<br/>
 #Return: n/a</p>
@@ -426,7 +426,7 @@ using System.Collections.Generic;</p>
 
 }</code></pre>
 
-<p>#Function: DestroyCloth<br/>
+<p style="font-size:18px">#Function: DestroyCloth<br/>
 #Parameters: n/a<br/>
 #Description: destroy cloth at run time. All the lists assign to a new list. Also, reset InputField<br/>
 #Return: n/a</p>
@@ -458,7 +458,7 @@ using System.Collections.Generic;</p>
 
 }</code></pre>
 
-<p>#Function: ClothSpawn<br/>
+<p style="font-size:18px">#Function: ClothSpawn<br/>
 #Parameters: n/a<br/>
 #Description: Instantiate the cloth(Grid) using particle, spring-damper, triangle and SetAnchor function<br/>
 #Return: n/a</p>
@@ -541,7 +541,7 @@ using System.Collections.Generic;</p>
 
 }</code></pre>
 
-<p>#Function: SetAnchor<br/>
+<p style="font-size:18px">#Function: SetAnchor<br/>
 #Parameters: n/a<br/>
 #Description: Set 2 as a pin-point to hold up the cloth(Grid)<br/>
 #Return: n/a</p>
@@ -563,11 +563,11 @@ using System.Collections.Generic;</p>
     }
 }</code></pre>
 
-<p><strong>File</strong>: Particle.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: Particle.cs<br/>
 Using UnityEngine;<br/>
 Using System.Collections;</p>
 
-<p>#Function: EulerIntegration <br/>
+<p style="font-size:18px">#Function: EulerIntegration <br/>
 #Parameters: n/a<br/>
 #Description: integrate particle motion by calculating acceleration with Newton’s second law then add it to the particle Velocity with the time that past by. Update particle position with that Velocity also with the time that past by. This calculation won’t apply to the particle that is anchor<br/>
 #Return: n/a</p>
@@ -581,7 +581,7 @@ Using System.Collections;</p>
     }
 }</code></pre>
 
-<p>#Function: Start<br/>
+<p style="font-size:18px">#Function: Start<br/>
 #Parameter: n/a<br/>
 #Description: Zero out Velocity, and assign Position to this gameobject current position that this script attach to<br/>
 #Return: n/a </p>
@@ -591,11 +591,11 @@ Using System.Collections;</p>
     Position = transform.position;
 }</code></pre>
 
-<p><strong>File</strong>: SpringDamper.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: SpringDamper.cs<br/>
 Using UnityEngine;<br/>
 Using System.Collections;</p>
 
-<p>#Function: SetSpring<br/>
+<p style="font-size:18px">#Function: SetSpring<br/>
 #Parameters: Particle _p1, Particle _p2<br/>
 #Description: _p1 and _p2 are the two particles that this spring connected to. Use _p1 and _p2 to get the information of which particle it is, then assign them to p1 and p2 data members<br/>
 #Return: n/a</p>
@@ -605,7 +605,7 @@ Using System.Collections;</p>
     p2 = _p2;
 }</code></pre>
 
-<p>#Function: computeForce<br/>
+<p style="font-size:18px">#Function: computeForce<br/>
 #Parameters: n/a<br/>
 #Description: Calculate spring force from the two particles that this spring connected to, then apply that force to the particles force<br/>
 #Return: n/a</p>
@@ -633,7 +633,7 @@ Using System.Collections;</p>
 
 }</code></pre>
 
-<p>#Function: Update<br/>
+<p style="font-size:18px">#Function: Update<br/>
 #Parameters: n/a<br/>
 #Description: update spring as the particle position change<br/>
 #Return: n/a</p>
@@ -644,11 +644,11 @@ Using System.Collections;</p>
     spring.SetPosition(1, p2.Position);
 }</code></pre>
 
-<p><strong>File</strong>: Triangle.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: Triangle.cs<br/>
 using UnityEngine;<br/>
 using System.Collections;</p>
 
-<p>#Function: Start<br/>
+<p style="font-size:18px">#Function: Start<br/>
 #Parameters: n/a<br/>
 #Description: zero out airVelocity, assign airDensity to 1, and dragCoefficient to 0.5<br/>
 #Return: n/a</p>
@@ -659,7 +659,7 @@ using System.Collections;</p>
    dragCoefficient = 1f;
 }</code></pre>
 
-<p>#Function: makeTriangle<br/>
+<p style="font-size:18px">#Function: makeTriangle<br/>
 #Parameters: Particle _p1, Particle _p2, Particle _p3<br/>
 #Description: _p1, _p2, and _p3 are the three particles that going to form the triangle. Takes in three particles to get the information of which particle belong to this triangle <br/>
 #Return:n/a</p>
@@ -670,7 +670,7 @@ using System.Collections;</p>
    p3 = _p3;
 }</code></pre>
 
-<p>#Function: computeForce<br/>
+<p style="font-size:18px">#Function: computeForce<br/>
 #Parameters: n/a<br/>
 #Description: computing aerodynamic force for the triangle, then apply for each particle force of the triangle<br/>
 #Return: n/a</p>
@@ -699,11 +699,11 @@ using System.Collections;</p>
 
 }</code></pre>
 
-<p><strong>File</strong>: Exit.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: Exit.cs<br/>
 using UnityEngine;<br/>
 using System.Collections;</p>
 
-<p>#Function: exitApplication<br/>
+<p style="font-size:18px">#Function: exitApplication<br/>
 #Parameters: n/a<br/>
 #Description: quit the application<br/>
 #Return: n/a</p>
@@ -712,12 +712,12 @@ using System.Collections;</p>
    Application.Quit();
 }</code></pre>
 
-<p><strong>File</strong>: ClothGUI.cs<br/>
+<p style="font-size:18px"><strong>File</strong>: ClothGUI.cs<br/>
 using UnityEngine;<br/>
 using UnityEngine.UI;<br/>
 using System.Collections;</p>
 
-<p>#Function: Start<br/>
+<p style="font-size:18px">#Function: Start<br/>
 #Parameters: n/a<br/>
 #Description: set all the GUI elements position depend on the screen width and height<br/>
 #Return: n/a</p>
@@ -752,7 +752,7 @@ using System.Collections;</p>
 	
 }</code></pre>
 
-<p>#Function: Update<br/>
+<p style="font-size:18px">#Function: Update<br/>
 #Parameters: n/a<br/>
 #Description: Checking if the user input on the InputField. If user did, Create Cloth button is able to click . If user didn’t, Create Cloth button is disable<br/>
 #Return: n/a</p>

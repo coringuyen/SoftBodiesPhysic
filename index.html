@@ -31,7 +31,7 @@
 
       <section>
         <div id="title">
-          <h1>SoftBodiesPhysic</h1>
+          <h2>SoftBodiesPhysic</h2>
           <p></p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/coringuyen">coringuyen</a></span>
@@ -128,24 +128,30 @@ try {
   codeXHR.send(null);
 }
 </script>
-		
-        <h1>
-<a id="problem-description" class="anchor" href="#problem-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<center><strong>Problem Description</strong></center>
-</h1>
 
-<p style="font-size:18px"><strong>Name</strong>: Cloth Simulation</p>
-<p style="font-size:18px"><strong>Problem Statement</strong>: Implement cloth simulation using particle, spring-damper, and triangle. Under two step of physic simulation is compute forces, and integrate motion.</p>
-<p style="font-size:18px"><strong>Problem Specification</strong>:<br/>
+<h1>
+<a id="problem-description" class="anchor" href="#problem-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<center><b><ins>Documentation</ins></b></center>
+</h1>
+		<p></p><br/>
+		
+        <h2>
+<a id="problem-description" class="anchor" href="#problem-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<center><b>Problem Description</b></center>
+</h2>
+
+<p style="font-size:18px"><b>Name</b>: Cloth Simulation</p>
+<p style="font-size:18px"><b>Problem Statement</b>: Implement cloth simulation using particle, spring-damper, and triangle. Under two step of physic simulation is compute forces, and integrate motion.</p>
+<p style="font-size:18px"><b>Problem Specification</b>:<br/>
     <span style="padding-left:68px;">Compute Force:</span><br/> 
 		<span style="padding-left:136px;">For each particle apply Gravity force.</span><br/>
 		<span style="padding-left:136px;">For each spring-damper compute spring force then apply the <span style="padding-left:136px;">force to the two particles that this spring-damper connected to.</span><br/>
 		<span style="padding-left:136px;">For each triangle compute aerodynamic force then apply the <span style="padding-left:136px;">force to the 3 particles that form the triangle.</span><br/>
     <span style="padding-left:68px;">Integrate Motion: For each particle apply Euler Integration.</span><br/></p>
 
-<h1>
-<a id="user-interface-information" class="anchor" href="#user-interface-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><strong>User Interface Information</strong>
-</h1></center>
+<h2>
+<a id="user-interface-information" class="anchor" href="#user-interface-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><b>User Interface Information</b>
+</h2></center>
 
 <p style="font-size:18px">Name: SpringConstant<br/>
 Description: stiffness of the spring</p>
@@ -162,8 +168,8 @@ Description: the direction of air will blow on z axis</p>
 <p style="font-size:18px">Name: Create Cloth<br/>
 Description: Instantiate the Grid</p>
 
-<p style="font-size:18px">Name: Exit<br/>
-Description: quit the application</p>
+<p style="font-size:18px">Name: Instruction<br/>
+Description: instructions for the user to know what to do with the program</p>
 
 <p style="font-size:18px">Name: Destroy<br/>
 Description: destroy the cloth(Grid)</p>
@@ -180,11 +186,20 @@ Description: the width of the cloth. How long the cloth would be</p>
 <p style="font-size:18px">Name: Height<br/>
 Description: the height of the cloth. How tall the cloth would be</p>
 
-<h1>
-<a id="functions-information" class="anchor" href="#functions-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><strong>Functions Information</strong></center>
-</h1>
+<p style="font-size:18px">Name: 2 Anchor<br/>
+Description: there will be 2 anchors when the cloth spawn</p>
 
-<p style="font-size:18px"><strong>File</strong>: ClothSimulation.cs<br/>
+<p style="font-size:18px">Name: 4 Anchor<br/>
+Description: there will be 4 anchors when the cloth spawn</p>
+
+<p style="font-size:18px">Name: Camera Instruction<br/>
+Description: instructions for the user to know how to move the camera</p>
+
+<h2>
+<a id="functions-information" class="anchor" href="#functions-information" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><b>Functions Information</b></center>
+</h2>
+
+<p style="font-size:18px"><b>File</b>: ClothSimulation.cs<br/>
 Class: ClothSimulation<br/>
 Data members:<br/>
     <span style="padding-left:68px;">Name: ParticlesPreb</span><br/>
@@ -212,7 +227,7 @@ Data members:<br/>
 
 <p style="font-size:18px">Function: SetAnchor<br/>
 Parameters: n/a<br/>
-Description: Set 2 as a pin-point to hold up the cloth(Grid)<br/>
+Description: Set 2 or 4 particles as a pin-point to hold up the cloth(Grid) depend on user input<br/>
 Return: n/a</p>
 
 <p style="font-size:18px">Function: ClothSpawn<br/>
@@ -235,7 +250,7 @@ Parameters: n/a<br/>
 Description: destroy cloth at run time. All the lists assign to a new list. Also, reset InputField<br/>
 Return: n/a</p>
 
-<p style="font-size:18px"><strong>File</strong>: Particle.cs<br/>
+<p style="font-size:18px"><b>File</b>: Particle.cs<br/>
 Class: Particle<br/>
 Data members<br/>
     <span style="padding-left:68px;">Name: Position</span><br/>
@@ -259,13 +274,13 @@ Parameter: n/a<br/>
 Description: Zero out Velocity, and assign Position to this gameobject current position that this script attach to<br/>
 Return: n/a </p>
 
-<p style="font-size:18px"><strong>File</strong>: SpringDamper.cs<br/>
+<p style="font-size:18px"><b>File</b>: SpringDamper.cs<br/>
 Class: SpringDamper<br/>
 Data members<br/>
     <span style="padding-left:68px;">Name: SpringConstant</span><br/>
     <span style="padding-left:68px;">Description: the coefficient to control the stiffness of the spring</span></p>
     <p style="font-size:18px"><span style="padding-left:68px;">Name: DampingFactor</span><br/>
-    <span style="padding-left:68px;">Description: the coefficient to restrict the spring velocity so it won’t go crazy</span></p>
+    <span style="padding-left:68px;">Description: the coefficient to restrict the spring velocity so it won’t go <span style="padding-left:68px;">crazy</span></p>
     <p style="font-size:18px"><span style="padding-left:68px;">Name: RestLength</span><br/>
 	<span style="padding-left:68px;">Description: the coefficient for spring length that need to be maintain</span></p>
     <p style="font-size:18px"><span style="padding-left:68px;">Name: p1</span><br/>
@@ -288,7 +303,7 @@ Parameters: n/a<br/>
 Description: update spring as the particle position change<br/>
 Return: n/a</p>
 
-<p style="font-size:18px"><strong>File</strong>: Triangle.cs<br/>
+<b><p style="font-size:18px">File</b>: Triangle.cs<br/>
 Class: Triangle<br/>
 Data members<br/>
 	<span style="padding-left:68px;">Name: p1</span><br/>
@@ -319,7 +334,7 @@ Parameters: n/a<br/>
 Description: computing aerodynamic force for the triangle, then apply for each particle force of the triangle<br/>
 Return: n/a</p>
 
-<p style="font-size:18px"><strong>File</strong>: Exit.cs<br/>
+<p style="font-size:18px"><b>File</b>: Exit.cs<br/>
 Class: Exit<br/>
 Data members<br/>
     n/a</p>
@@ -329,7 +344,7 @@ Parameters: n/a<br/>
 Description: quit the application<br/>
 Return: n/a</p>
 
-<p style="font-size:18px"><strong>File</strong>: ClothGUI.cs<br/>
+<p style="font-size:18px"><b>File</b>: ClothGUI.cs<br/>
 Class: ClothGUI<br/>
 Data members<br/>
     <span style="padding-left:68px;">Name: SpringConstant</span><br/>
@@ -340,8 +355,8 @@ Data members<br/>
     <span style="padding-left:68px;">Description:  user can change the length of the spring that need to be <span style="padding-left:68px;">maintain</span></p>
 	<p style="font-size:18px"><span style="padding-left:68px;">Name: AirBlow</span><br/>
     <span style="padding-left:68px;">Description: user can put some air on the z axis</span></p>
-	<p style="font-size:18px"><span style="padding-left:68px;">Name: Exit</span><br/>
-    <span style="padding-left:68px;">Description: when this button press the application will quit</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: Instruction</span><br/>
+    <span style="padding-left:68px;">Description: Instruction page will appear when this button press</span></p>
 	<p style="font-size:18px"><span style="padding-left:68px;">Name: createCloth</span><br/>
 	<span style="padding-left:68px;">Description: spawn the cloth(Grid). Set all the sliders to active, and put <span style="padding-left:68px;">the exit button to bottom right corner</span></p>
 	<p style="font-size:18px"><span style="padding-left:68px;">Name: DestroyCloth</span><br/>
@@ -354,10 +369,36 @@ Data members<br/>
     <span style="padding-left:68px;">Description: to get the user input for width</span></p>
     <p style="font-size:18px"><span style="padding-left:68px;">Name: Height</span><br/>
     <span style="padding-left:68px;">Description: to get the user input for height</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: anchor2</span><br/>
+    <span style="padding-left:68px;">Description: a boolean for user to check if they want 2 anchors for the <span style="padding-left:68px;">cloth</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: anchor4</span><br/>
+    <span style="padding-left:68px;">Description: a boolean for user to check if they want 4 anchors for the <span style="padding-left:68px;">cloth</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: InstructionBG</span><br/>
+    <span style="padding-left:68px;">Description: raw image for instructions text which is just a color back <span style="padding-left:68px;">ground</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: instructions</span><br/>
+    <span style="padding-left:68px;">Description: text of instructions for user to read</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: BackToMenu</span><br/>
+    <span style="padding-left:68px;">Description: back to the start menu from the instructions text when this <span style="padding-left:68px;">button is press</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: CameraInstruction</span><br/>
+    <span style="padding-left:68px;">Description: when this button is press it will bring user to the camera <span style="padding-left:68px;">instructions text</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: CameraInstructionBG</span><br/>
+    <span style="padding-left:68px;">Description: raw image for camera instructions text which is just a color <span style="padding-left:68px;">back ground</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: camerainstructions</span><br/>
+    <span style="padding-left:68px;">Description: text for user to read about camera instructions</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: BackToCloth</span><br/>
+    <span style="padding-left:68px;">Description: bring user back to Cloth from camera instructions text when <span style="padding-left:68px;">this button is press</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: springconstant</span><br/>
+    <span style="padding-left:68px;">Description: a float to store SpringConstant default value</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: dampingfactor</span><br/>
+    <span style="padding-left:68px;">Description: a float to store DampingFactor default value</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: restlength</span><br/>
+    <span style="padding-left:68px;">Description: a float to store RestLength default value</span></p>
+	<p style="font-size:18px"><span style="padding-left:68px;">Name: air</span><br/>
+    <span style="padding-left:68px;">Description: a float to store AirBlow default value</span></p>
 	
 <p style="font-size:18px">Function: Start<br/>
 Parameters: n/a<br/>
-Description: set all the GUI elements position depend on the screen width and height<br/>
+Description: set all the GUI elements position depend on the screen width and height. Set all the GUI that need to be Active for Start Menu. Also, store the sliders default value<br/>
 Return: n/a</p>
 
 <p style="font-size:18px">Function: Update<br/>
@@ -365,11 +406,36 @@ Parameters: n/a<br/>
 Description: Checking if the user input on the InputField. If user did, Create Cloth button is able to click . If user didn’t, Create Cloth button is disable<br/>
 Return: n/a</p>
 
-<h1>
-<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><strong>Implementation</strong></center>
-</h1>
+<p style="font-size:18px">Function: turnOffInput<br/>
+Parameters: n/a<br/>
+Description: Set all the inputfields from Active to Inactive<br/>
+Return: n/a</p>
 
-<p style="font-size:18px"><strong>File</strong>: ClothSimulation.cs<br/>
+<p style="font-size:18px">Function: turnOnInput<br/>
+Parameters: n/a<br/>
+Description: Set all the inputfields from Inactive to Active<br/>
+Return: n/a</p>
+
+<p style="font-size:18px">Function: turnOffSlider<br/>
+Parameters: n/a<br/>
+Description: Set all the sliders from Active to Inactive<br/>
+Return: n/a</p>
+
+<p style="font-size:18px">Function: turnOnSlider<br/>
+Parameters: n/a<br/>
+Description: Set all the sliders from Inactive to Active<br/>
+Return: n/a</p>
+
+<p style="font-size:18px">Function: resetSliders<br/>
+Parameters: n/a<br/>
+Description: Resest all the sliders back to their default value<br/>
+Return: n/a</p>
+
+<h2>
+<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a><center><b>Implementation</b></center>
+</h2>
+
+<p style="font-size:18px"><b>File</b>: ClothSimulation.cs<br/>
 using UnityEngine;<br/>
 using System.Collections;<br/>
 using System.Collections.Generic;</p>
@@ -380,7 +446,7 @@ using System.Collections.Generic;</p>
 #Return: n/a</p>
 <pre><code>void Start()
 {
-    clothgui = GetComponent();
+    clothgui = GetComponent&lt;ClothGUI&gt;();
 }</code></pre>
 
 <p style="font-size:18px">#Function: FixedUpdate<br/>
@@ -543,7 +609,7 @@ using System.Collections.Generic;</p>
 
 <p style="font-size:18px">#Function: SetAnchor<br/>
 #Parameters: n/a<br/>
-#Description: Set 2 as a pin-point to hold up the cloth(Grid)<br/>
+#Description: Set 2 or 4 particles as a pin-point to hold up the cloth(Grid) depend on user input<br/>
 #Return: n/a</p>
 <pre><code>void SetAnchor()
 {
@@ -563,7 +629,7 @@ using System.Collections.Generic;</p>
     }
 }</code></pre>
 
-<p style="font-size:18px"><strong>File</strong>: Particle.cs<br/>
+<p style="font-size:18px"><b>File</b>: Particle.cs<br/>
 Using UnityEngine;<br/>
 Using System.Collections;</p>
 
@@ -591,7 +657,7 @@ Using System.Collections;</p>
     Position = transform.position;
 }</code></pre>
 
-<p style="font-size:18px"><strong>File</strong>: SpringDamper.cs<br/>
+<p style="font-size:18px"><b>File</b>: SpringDamper.cs<br/>
 Using UnityEngine;<br/>
 Using System.Collections;</p>
 
@@ -644,7 +710,7 @@ Using System.Collections;</p>
     spring.SetPosition(1, p2.Position);
 }</code></pre>
 
-<p style="font-size:18px"><strong>File</strong>: Triangle.cs<br/>
+<p style="font-size:18px"><b>File</b>: Triangle.cs<br/>
 using UnityEngine;<br/>
 using System.Collections;</p>
 
@@ -699,7 +765,7 @@ using System.Collections;</p>
 
 }</code></pre>
 
-<p style="font-size:18px"><strong>File</strong>: Exit.cs<br/>
+<p style="font-size:18px"><b>File</b>: Exit.cs<br/>
 using UnityEngine;<br/>
 using System.Collections;</p>
 
@@ -712,30 +778,30 @@ using System.Collections;</p>
    Application.Quit();
 }</code></pre>
 
-<p style="font-size:18px"><strong>File</strong>: ClothGUI.cs<br/>
+<p style="font-size:18px"><b>File</b>: ClothGUI.cs<br/>
 using UnityEngine;<br/>
 using UnityEngine.UI;<br/>
 using System.Collections;</p>
 
 <p style="font-size:18px">#Function: Start<br/>
 #Parameters: n/a<br/>
-#Description: set all the GUI elements position depend on the screen width and height<br/>
+#Description: set all the GUI elements position depend on the screen width and height. Set all the GUI that need to be Active for Start Menu. Also, store the sliders default value<br/>
 #Return: n/a</p>
 <pre><code>void Start ()
 {
-    DestroyCloth.GetComponent().position = new Vector3(Screen.width * 
+    DestroyCloth.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 
     0.85f, Screen.height * 0.9f, 0);
-    CreateCloth.GetComponent().position = new Vector3(Screen.width * 
+    CreateCloth.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 
     0.5f, Screen.height * 0.54f, 0);
-    Exit.GetComponent().position = new Vector3(Screen.width * 0.5f, 
+    Exit.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.5f, 
     Screen.height * 0.44f, 0);
-    RestLength.GetComponent().position = new Vector3(Screen.width * 
+    RestLength.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 
     0.15f, Screen.height * 0.9f, 0);
-    DampingFactor.GetComponent().position = new Vector3(Screen.width * 
+    DampingFactor.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 
     0.15f, Screen.height * 0.8f, 0);
-    SpringConstant.GetComponent().position = new Vector3(Screen.width * 
+    SpringConstant.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 
     0.15f, Screen.height * 0.7f, 0);
-    AirBlow.GetComponent().position = new Vector3(Screen.width * 0.15f, 
+    AirBlow.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.15f, 
     Screen.height * 0.6f, 0);</p>
 
 	Row.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.3f, 
@@ -747,8 +813,32 @@ using System.Collections;</p>
 	Height.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.7f,  
 	Screen.height * 0.8f, 0);
 
+	anchor2.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.37f, Screen.height * 0.86f, 0);
+	anchor4.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.66f, Screen.height * 0.86f, 0);
+
+	InstructionBG.GetComponent&lt;RectTransform&gt;().sizeDelta = new Vector2(Screen.width, Screen.height);
+	instructions.GetComponent&lt;RectTransform&gt;().sizeDelta = new Vector2(Screen.width, Screen.height);
+	BackToMenu.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.1f, Screen.height * 0.93f, 0);
+
+	CameraInstruction.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.85f, Screen.height * 0.1f, 0);
+	CameraInstructionBG.GetComponent&lt;RectTransform&gt;().sizeDelta = new Vector2(Screen.width, Screen.height);
+	camerainstructions.GetComponent&lt;RectTransform&gt;().sizeDelta = new Vector2(Screen.width, Screen.height);
+	BackToCloth.GetComponent&lt;RectTransform&gt;().position = new Vector3(Screen.width * 0.1f, Screen.height * 0.93f, 0);
+
+	springcontant = SpringConstant.value;
+	dampingfactor = DampingFactor.value;
+	restlength = RestLength.value;
+	air = AirBlow.value;
+
 	CreateCloth.gameObject.SetActive(true);
-	Exit.gameObject.SetActive(true);
+	Instruction.gameObject.SetActive(true);
+	anchor2.gameObject.SetActive(true);
+	anchor4.gameObject.SetActive(true);
+	Row.gameObject.SetActive(true);
+	Column.gameObject.SetActive(true);
+	Width.gameObject.SetActive(true);
+	Height.gameObject.SetActive(true);
+	anchor2.isOn = true;
 	
 }</code></pre>
 
@@ -765,8 +855,68 @@ using System.Collections;</p>
     else
         CreateCloth.interactable = false;
 }</code></pre>
-      </section>
 
+<p style="font-size:18px">#Function: turnOffInput<br/>
+#Parameters: n/a<br/>
+#Description: Set all the inputfields from Active to Inactive<br/>
+#Return: n/a</p>
+<pre><code>public void turnOffInput()
+{
+	Row.gameObject.SetActive(false);
+	Column.gameObject.SetActive(false);
+	Width.gameObject.SetActive(false);
+	Height.gameObject.SetActive(false);
+}</code></pre>
+
+<p style="font-size:18px">#Function: turnOnInput<br/>
+#Parameters: n/a<br/>
+#Description: Set all the inputfields from Inactive to Active<br/>
+#Return: n/a</p>
+<pre><code>public void turnOnInput()
+{
+	Row.gameObject.SetActive(true);
+	Column.gameObject.SetActive(true);
+	Width.gameObject.SetActive(true);
+	Height.gameObject.SetActive(true);
+}</code></pre>
+
+<p style="font-size:18px">#Function: turnOffSlider<br/>
+#Parameters: n/a<br/>
+#Description: Set all the sliders from Active to Inactive<br/>
+#Return: n/a</p>
+<pre><code>public void turnOffSlider()
+{
+	SpringConstant.gameObject.SetActive(false);
+	DampingFactor.gameObject.SetActive(false);
+	RestLength.gameObject.SetActive(false);
+	AirBlow.gameObject.SetActive(false);
+}</code></pre>
+
+<p style="font-size:18px">#Function: turnOnSlider<br/>
+#Parameters: n/a<br/>
+#Description: Set all the sliders from Inactive to Active<br/>
+#Return: n/a</p>
+<pre><code>public void turnOnSlider()
+{
+	SpringConstant.gameObject.SetActive(true);
+	DampingFactor.gameObject.SetActive(true);
+	RestLength.gameObject.SetActive(true);
+	AirBlow.gameObject.SetActive(true);
+}</code></pre>
+
+<p style="font-size:18px">#Function: resetSliders<br/>
+#Parameters: n/a<br/>
+#Description: Resest all the sliders back to their default value<br/>
+#Return: n/a</p>
+<pre><code>public void resetSliders()
+{
+	SpringConstant.value = springcontant;
+	DampingFactor.value = dampingfactor;
+	RestLength.value = restlength;
+	AirBlow.value = air;
+}</code></pre>
+
+      </section>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
